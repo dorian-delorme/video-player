@@ -1,15 +1,30 @@
-console.log('hello world')
+// Beautiful player using POO
 
-let container = document.querySelector('.container')
+class Player {
+  constructor(basePath, parent, id, className, link, width, height, autoplay) {
+    this.parent    = document.querySelector(parent)
+    this.link      = basePath + link
+    this.width     = width
+    this.height    = height
+    this.autoplay  = autoplay
+    this.id        = id
+    this.className = className
+  }
+  
+  create() {
+    let myPlayer = document.createElement('video')
 
-let video = document.createElement('video')
+    myPlayer.src       = this.link
+    myPlayer.id        = this.id
+    myPlayer.className = this.className
+    myPlayer.autoplay  = this.autoplay
+    myPlayer.width     = this.width
+    myPlayer.height    = this.height
 
-video.src = "./src/videos/video.mp4"
+    this.parent.appendChild(myPlayer)
+  }
+}
 
-video.id = "video"
+// Creating new Player
 
-video.autoplay = "true"
-
-video.controls = "true"
-
-container.appendChild(video)
+new Player('./src/videos/', '.container', '', 'playerCustom', 'video.mp4', 400, 300, true).create()
