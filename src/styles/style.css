@@ -11,3 +11,33 @@ body {
 	width: 100%;
 	min-height: 100vh;
 }
+
+.player {
+	position: relative;
+}
+
+.controlBar {
+	display: flex;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 40px;
+	width: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	align-items: center;
+}
+
+.playPauseButton {
+	margin-left: 10px;
+	width: 10px;
+	height: 10px;
+}
+
+.isPaused {
+	background-color: red;
+}
+
+.isPlaying {
+	background-color: blue;
+}
