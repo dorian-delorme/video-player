@@ -45,7 +45,7 @@ class Player {
     playPauseButton.className = 'playPauseButton'
     controlBar.appendChild(playPauseButton)
 
-    // Check Video Status to display the right button (at start could be improved for sure)
+    // Check Video Status to display the right button (at start) (could be improved for sure)
     if(player.paused) {
       playPauseButton.classList.remove('isPlaying')
       playPauseButton.classList.add('isPaused')
@@ -79,6 +79,15 @@ class Player {
         playPauseButton.classList.add('isPlaying')
       }
     })
+
+    // Volume
+    let volumeController = document.createElement('div')
+    volumeController.className = 'volumeController'
+    controlBar.appendChild(volumeController)
+    let volumeBar = document.createElement('div')
+    volumeBar.className = 'volumeBar'
+    volumeController.appendChild(volumeBar)
+    volumeBar.style.width = (player.volume * 100) + '%';
   }
 }
 

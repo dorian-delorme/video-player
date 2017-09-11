@@ -42,3 +42,18 @@ body {
 .isPlaying {
 	background-color: blue;
 }
+
+.volumeController {
+	height: 10px;
+	width: 100px;
+	background-color: black;
+	position: relative;
+}
+
+.volumeBar {
+	background-color: white;
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+}
