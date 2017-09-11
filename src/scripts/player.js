@@ -3,14 +3,15 @@
 // Work In Progress
 
 class Player {
-  constructor(basePath, parent, id, className, link, width, height, controls, autoplay) {
-    this.parent    = document.querySelector(parent)
-    this.link      = basePath + link
-    this.width     = width
-    this.height    = height
-    this.autoplay  = autoplay
-    this.id        = id
-    this.className = className
+  constructor(params = { basePath, parent, id, className, link, width, height, controls, autoplay}) {
+
+    this.parent    = document.querySelector(params.parent)
+    this.link      = params.basePath + params.link
+    this.width     = params.width
+    this.height    = params.height
+    this.autoplay  = params.autoplay
+    this.id        = params.id
+    this.className = params.className
 
     let myPlayer = document.createElement('video')
 
@@ -24,7 +25,7 @@ class Player {
     this.parent.appendChild(myPlayer)
 
     // Check if controls are required
-    if (controls) {
+    if (params.controls) {
       this.createControllers()
     } else {
       console.log('To enable controllers turn controls to true')
@@ -81,16 +82,26 @@ class Player {
     })
 
     // Volume
-    let volumeController = document.createElement('div')
-    volumeController.className = 'volumeController'
-    controlBar.appendChild(volumeController)
-    let volumeBar = document.createElement('div')
+    let volumeBar = document.createElement('input')
+    volumeBar.type = 'range'
     volumeBar.className = 'volumeBar'
-    volumeController.appendChild(volumeBar)
-    volumeBar.style.width = (player.volume * 100) + '%';
+    controlBar.appendChild(volumeBar)
+    player.volume = volumeBar.value / 100
+    // volumeBar.style.width = (player.volume * 100) + '%';
+
+    // To make the volume goes up or down
+    let events = ['click', 'onChange', 'mouseout']
+    events.forEach(function(e) {
+      volumeBar.addEventListener( e, function() {
+        player.volume = volumeBar.value / 100
+        console.log(player.volume)
+        // volumeBar.style.width = (player.volume * 100) + '%';
+      })
+    })
   }
 }
 
 // Creating new Player
 
-let customPlayer = new Player('./src/videos/', '.player', '1', 'customPlayer', 'video.mp4', 400, 300, true, true)
+let customPlayer = new Player({ basePath: './src/videos/', parent: '.player', id: '1', className: 'customPlayer', link: 'video.mp4', width: 400, height: 300, controls: true, autoplay: true})
+let customPlayer_2 = new Player({ basePath: './src/videos/', parent: '.player_2', id: '2', className: 'customPlayer', link: 'video.mp4', width: 400, height: 300, controls: true, autoplay: true})
