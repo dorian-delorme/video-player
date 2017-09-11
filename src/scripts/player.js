@@ -3,7 +3,7 @@
 // Work In Progress
 
 class Player {
-  constructor(basePath, parent, id, className, link, width, height, autoplay) {
+  constructor(basePath, parent, id, className, link, width, height, controls, autoplay) {
     this.parent    = document.querySelector(parent)
     this.link      = basePath + link
     this.width     = width
@@ -11,9 +11,7 @@ class Player {
     this.autoplay  = autoplay
     this.id        = id
     this.className = className
-  }
 
-  create() {
     let myPlayer = document.createElement('video')
 
     myPlayer.src       = this.link
@@ -24,9 +22,16 @@ class Player {
     myPlayer.height    = this.height
 
     this.parent.appendChild(myPlayer)
+
+    // Check if controls are required
+    if (controls) {
+      this.createControllers()
+    } else {
+      console.log('To enable controllers turn controls to true')
+    }
   }
 
-  controls() {
+  createControllers() {
     // Target the player
     let player = document.getElementById(this.id)
 
@@ -40,23 +45,25 @@ class Player {
     playPauseButton.className = 'playPauseButton'
     controlBar.appendChild(playPauseButton)
 
-    // Check Video Status to display the right button
-    // if(player.paused) {
-    //   player.className.remove('.isPlaying')
-    //   player.className.add('.isPaused')
-    // }
-    // else {
-    //   player.className.remove('.isPaused')
-    //   player.className.add('.isPlaying')
-    // }
+    // Check Video Status to display the right button (at start could be improved for sure)
+    if(player.paused) {
+      playPauseButton.classList.remove('isPlaying')
+      playPauseButton.classList.add('isPaused')
+    } else {
+      playPauseButton.classList.remove('isPaused')
+      playPauseButton.classList.add('isPlaying')
+    }
 
     // Event Play/Pause on click video
     player.addEventListener('click', function() {
       if(player.paused) {
         player.play()
-      }
-      else {
+        playPauseButton.classList.remove('isPlaying')
+        playPauseButton.classList.add('isPaused')
+      } else {
         player.pause()
+        playPauseButton.classList.remove('isPaused')
+        playPauseButton.classList.add('isPlaying')
       }
     })
 
@@ -64,19 +71,17 @@ class Player {
     playPauseButton.addEventListener('click', function() {
       if(player.paused) {
         player.play()
-      }
-      else {
+        playPauseButton.classList.remove('isPlaying')
+        playPauseButton.classList.add('isPaused')
+      } else {
         player.pause()
+        playPauseButton.classList.remove('isPaused')
+        playPauseButton.classList.add('isPlaying')
       }
     })
-    console.log(player.currentTime);
   }
 }
 
 // Creating new Player
 
-let customPlayer = new Player('./src/videos/', '.player', '1', 'customPlayer', 'video.mp4', 400, 300, true)
-
-customPlayer.create()
-
-customPlayer.controls()
+let customPlayer = new Player('./src/videos/', '.player', '1', 'customPlayer', 'video.mp4', 400, 300, true, true)
