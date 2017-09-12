@@ -48,7 +48,6 @@ class Player {
 
     // Check Video Status to display the right button
     if(player.autoplay) {
-      console.log('test');
       playPauseButton.classList.add('isPlaying')
     } else {
       playPauseButton.classList.remove('isPlaying')
@@ -57,7 +56,7 @@ class Player {
     let playPauseEvents = [player, playPauseButton]
     playPauseEvents.forEach(function(e) {
       e.addEventListener('click', function() {
-        if(player.ended || player.paused) {
+        if(player.paused) {
           player.play()
           playPauseButton.classList.add('isPlaying')
         } else {
@@ -65,6 +64,18 @@ class Player {
           playPauseButton.classList.remove('isPlaying')
         }
       })
+    })
+
+    this.parent.addEventListener('keydown', function(e) {
+      if (e.keyCode === 32) {
+        if(player.paused) {
+          player.play()
+          playPauseButton.classList.add('isPlaying')
+        } else {
+          player.pause()
+          playPauseButton.classList.remove('isPlaying')
+        }
+      }
     })
 
     // Volume

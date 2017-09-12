@@ -14,10 +14,12 @@ body {
 
 .player {
 	position: relative;
+	outline: none;
 }
 
 .player_2 {
 	position: relative;
+	outline: none;
 }
 
 .controlBar {
