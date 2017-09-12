@@ -55,47 +55,42 @@ class Player {
       playPauseButton.classList.add('isPlaying')
     }
 
-    // Event Play/Pause on click video
-    player.addEventListener('click', function() {
-      if(player.paused) {
-        player.play()
-        playPauseButton.classList.remove('isPlaying')
-        playPauseButton.classList.add('isPaused')
-      } else {
-        player.pause()
-        playPauseButton.classList.remove('isPaused')
-        playPauseButton.classList.add('isPlaying')
-      }
-    })
-
-    // Event Play/Pause on click button
-    playPauseButton.addEventListener('click', function() {
-      if(player.paused) {
-        player.play()
-        playPauseButton.classList.remove('isPlaying')
-        playPauseButton.classList.add('isPaused')
-      } else {
-        player.pause()
-        playPauseButton.classList.remove('isPaused')
-        playPauseButton.classList.add('isPlaying')
-      }
+    let playPauseEvents = [player, playPauseButton]
+    playPauseEvents.forEach(function(e) {
+      e.addEventListener('click', function() {
+        if(player.paused) {
+          player.play()
+          playPauseButton.classList.remove('isPlaying')
+          playPauseButton.classList.add('isPaused')
+        } else {
+          player.pause()
+          playPauseButton.classList.remove('isPaused')
+          playPauseButton.classList.add('isPlaying')
+        }
+      })
     })
 
     // Volume
-    let volumeBar = document.createElement('input')
-    volumeBar.type = 'range'
-    volumeBar.className = 'volumeBar'
-    controlBar.appendChild(volumeBar)
-    player.volume = volumeBar.value / 100
-    // volumeBar.style.width = (player.volume * 100) + '%';
+    let volumeController = document.createElement('div')
+    volumeController.className = 'volumeController'
+    controlBar.appendChild(volumeController)
+    // player.volume = volumeController.value / 100
 
-    // To make the volume goes up or down
-    let events = ['click', 'onChange', 'mouseout']
+    let volumeBar = document.createElement('div')
+    volumeBar.className = 'volumeBar'
+    volumeController.appendChild(volumeBar)
+    player.volume = 0.5
+    volumeBar.style.width = (player.volume * 100) + '%'
+
+    // Mute Button
+
+    // Events to make the volume goes up or down on click
+    let events = ['click']
     events.forEach(function(e) {
-      volumeBar.addEventListener( e, function() {
-        player.volume = volumeBar.value / 100
-        console.log(player.volume)
-        // volumeBar.style.width = (player.volume * 100) + '%';
+      volumeController.addEventListener( e, function(event) {
+        console.log(e);
+        player.volume = event.offsetX / volumeController.offsetWidth
+        volumeBar.style.width = ((event.offsetX / volumeController.offsetWidth ) * 100) + '%'
       })
     })
   }
