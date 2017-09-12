@@ -46,13 +46,12 @@ class Player {
     playPauseButton.className = 'playPauseButton'
     controlBar.appendChild(playPauseButton)
 
-    // Check Video Status to display the right button (at start) (could be improved for sure)
-    if(player.paused) {
-      playPauseButton.classList.remove('isPlaying')
-      playPauseButton.classList.add('isPaused')
-    } else {
-      playPauseButton.classList.remove('isPaused')
+    // Check Video Status to display the right button
+    if(player.autoplay) {
+      console.log('test');
       playPauseButton.classList.add('isPlaying')
+    } else {
+      playPauseButton.classList.remove('isPlaying')
     }
 
     let playPauseEvents = [player, playPauseButton]
@@ -60,12 +59,10 @@ class Player {
       e.addEventListener('click', function() {
         if(player.ended || player.paused) {
           player.play()
-          playPauseButton.classList.remove('isPaused')
           playPauseButton.classList.add('isPlaying')
         } else {
           player.pause()
           playPauseButton.classList.remove('isPlaying')
-          playPauseButton.classList.add('isPaused')
         }
       })
     })
@@ -105,27 +102,27 @@ class Player {
     volumeController.addEventListener('mousedown', function(event) {
       active = true
       muteButton.classList.remove('isMuted')
-        if( 0 >= event.offsetX / volumeController.offsetWidth <= 1) {
+        if( 0 <= event.offsetX / volumeController.offsetWidth && event.offsetX / volumeController.offsetWidth <= 0.9) {
           player.volume = event.offsetX / volumeController.offsetWidth
         } else if (event.offsetX / volumeController.offsetWidth < 0) {
           player.volume = 0
         } else {
           player.volume = 1
         }
-        volumeBar.style.transform = 'scaleX(' + event.offsetX / volumeController.offsetWidth + ')'
+        volumeBar.style.transform = 'scaleX(' + player.volume + ')'
     })
 
     volumeController.addEventListener('mousemove', function(event) {
       if(active) {
        muteButton.classList.remove('isMuted')
-        if( 0 >= event.offsetX / volumeController.offsetWidth <= 1) {
+        if( 0 <= event.offsetX / volumeController.offsetWidth && event.offsetX / volumeController.offsetWidth <= 0.9) {
           player.volume = event.offsetX / volumeController.offsetWidth
         } else if (event.offsetX / volumeController.offsetWidth < 0) {
           player.volume = 0
         } else {
           player.volume = 1
         }
-        volumeBar.style.transform = 'scaleX(' + event.offsetX / volumeController.offsetWidth + ')'
+        volumeBar.style.transform = 'scaleX(' + player.volume + ')'
       }
     })
 

@@ -38,14 +38,11 @@ body {
 	width: 10px;
 	height: 10px;
 	transition: all 200ms ease;
-}
-
-.isPaused {
-	background-color: red;
+	background-color: black;
 }
 
 .isPlaying {
-	background-color: blue;
+	background-color: white;
 }
 
 .muteButton {
