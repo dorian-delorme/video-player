@@ -102,9 +102,9 @@ class Player {
     volumeController.addEventListener('mousedown', function(event) {
       active = true
       muteButton.classList.remove('isMuted')
-        if( 0 <= event.offsetX / volumeController.offsetWidth && event.offsetX / volumeController.offsetWidth <= 0.9) {
+        if( 0.1 <= event.offsetX / volumeController.offsetWidth && event.offsetX / volumeController.offsetWidth <= 0.9) {
           player.volume = event.offsetX / volumeController.offsetWidth
-        } else if (event.offsetX / volumeController.offsetWidth < 0) {
+        } else if (event.offsetX / volumeController.offsetWidth < 0.1) {
           player.volume = 0
         } else {
           player.volume = 1
@@ -115,9 +115,9 @@ class Player {
     volumeController.addEventListener('mousemove', function(event) {
       if(active) {
        muteButton.classList.remove('isMuted')
-        if( 0 <= event.offsetX / volumeController.offsetWidth && event.offsetX / volumeController.offsetWidth <= 0.9) {
+        if( 0.1 <= event.offsetX / volumeController.offsetWidth && event.offsetX / volumeController.offsetWidth <= 0.9) {
           player.volume = event.offsetX / volumeController.offsetWidth
-        } else if (event.offsetX / volumeController.offsetWidth < 0) {
+        } else if (event.offsetX / volumeController.offsetWidth < 0.1) {
           player.volume = 0
         } else {
           player.volume = 1
