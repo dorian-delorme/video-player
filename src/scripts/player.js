@@ -58,40 +58,79 @@ class Player {
     let playPauseEvents = [player, playPauseButton]
     playPauseEvents.forEach(function(e) {
       e.addEventListener('click', function() {
-        if(player.paused) {
+        if(player.ended || player.paused) {
           player.play()
-          playPauseButton.classList.remove('isPlaying')
-          playPauseButton.classList.add('isPaused')
-        } else {
-          player.pause()
           playPauseButton.classList.remove('isPaused')
           playPauseButton.classList.add('isPlaying')
+        } else {
+          player.pause()
+          playPauseButton.classList.remove('isPlaying')
+          playPauseButton.classList.add('isPaused')
         }
       })
     })
 
     // Volume
+
+    // Mute Button
+    let muteButton = document.createElement('div')
+    muteButton.className = 'muteButton'
+    controlBar.appendChild(muteButton)
+
+    muteButton.addEventListener('click', function() {
+      let volumeSaved = 0;
+      if (!muteButton.classList.contains('isMuted')) {
+        this.volumeSaved = player.volume
+        player.volume = 0;
+        muteButton.classList.toggle('isMuted')
+      } else {
+        player.volume = this.volumeSaved
+        muteButton.classList.toggle('isMuted')
+      }
+    })
+
+    // Volume Slider
     let volumeController = document.createElement('div')
     volumeController.className = 'volumeController'
     controlBar.appendChild(volumeController)
-    // player.volume = volumeController.value / 100
 
     let volumeBar = document.createElement('div')
     volumeBar.className = 'volumeBar'
     volumeController.appendChild(volumeBar)
     player.volume = 0.5
-    volumeBar.style.width = (player.volume * 100) + '%'
+    volumeBar.style.transform = 'scaleX('+ player.volume + ')'
 
-    // Mute Button
+    let active = false
 
-    // Events to make the volume goes up or down on click
-    let events = ['click']
-    events.forEach(function(e) {
-      volumeController.addEventListener( e, function(event) {
-        console.log(e);
-        player.volume = event.offsetX / volumeController.offsetWidth
-        volumeBar.style.width = ((event.offsetX / volumeController.offsetWidth ) * 100) + '%'
-      })
+    volumeController.addEventListener('mousedown', function(event) {
+      active = true
+      muteButton.classList.remove('isMuted')
+        if( 0 >= event.offsetX / volumeController.offsetWidth <= 1) {
+          player.volume = event.offsetX / volumeController.offsetWidth
+        } else if (event.offsetX / volumeController.offsetWidth < 0) {
+          player.volume = 0
+        } else {
+          player.volume = 1
+        }
+        volumeBar.style.transform = 'scaleX(' + event.offsetX / volumeController.offsetWidth + ')'
+    })
+
+    volumeController.addEventListener('mousemove', function(event) {
+      if(active) {
+       muteButton.classList.remove('isMuted')
+        if( 0 >= event.offsetX / volumeController.offsetWidth <= 1) {
+          player.volume = event.offsetX / volumeController.offsetWidth
+        } else if (event.offsetX / volumeController.offsetWidth < 0) {
+          player.volume = 0
+        } else {
+          player.volume = 1
+        }
+        volumeBar.style.transform = 'scaleX(' + event.offsetX / volumeController.offsetWidth + ')'
+      }
+    })
+
+    window.addEventListener('mouseup', function(){
+      active = false
     })
   }
 }
