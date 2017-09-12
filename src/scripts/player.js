@@ -106,6 +106,7 @@ class Player {
           player.volume = event.offsetX / volumeController.offsetWidth
         } else if (event.offsetX / volumeController.offsetWidth < 0.1) {
           player.volume = 0
+          muteButton.classList.add('isMuted')
         } else {
           player.volume = 1
         }
@@ -119,6 +120,7 @@ class Player {
           player.volume = event.offsetX / volumeController.offsetWidth
         } else if (event.offsetX / volumeController.offsetWidth < 0.1) {
           player.volume = 0
+          muteButton.classList.add('isMuted')
         } else {
           player.volume = 1
         }
