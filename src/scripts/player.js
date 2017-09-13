@@ -242,8 +242,9 @@ class Player {
     window.addEventListener('mouseup', function(){
       if(activeTimeline) {
         player.play()
+        playPauseButton.classList.add('isPlaying')
+        activeTimeline = false
       }
-      activeTimeline = false
     })
   }
 }
