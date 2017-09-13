@@ -64,7 +64,7 @@ class Player {
     volumeBar.className = 'volumeBar'
     volumeController.appendChild(volumeBar)
 
-    let active = false
+    let activeVolume = false
 
     // Create currentTimer
     let currentTimer = document.createElement('div')
@@ -76,6 +76,7 @@ class Player {
     let timeline = document.createElement('div')
     timeline.className = 'timeline'
     controlBar.appendChild(timeline)
+    let activeTimeline = false
 
     // Create Timeline Bar
     let timelineBar = document.createElement('div')
@@ -143,7 +144,7 @@ class Player {
     })
 
     volumeController.addEventListener('mousedown', function(event) {
-      active = true
+      activeVolume = true
       muteButton.classList.remove('isMuted')
         if( 0.1 <= event.offsetX / volumeController.offsetWidth && event.offsetX / volumeController.offsetWidth <= 0.9) {
           player.volume = event.offsetX / volumeController.offsetWidth
@@ -157,7 +158,7 @@ class Player {
     })
 
     volumeController.addEventListener('mousemove', function(event) {
-      if(active) {
+      if(activeVolume) {
        muteButton.classList.remove('isMuted')
         if( 0.1 <= event.offsetX / volumeController.offsetWidth && event.offsetX / volumeController.offsetWidth <= 0.9) {
           player.volume = event.offsetX / volumeController.offsetWidth
@@ -172,7 +173,7 @@ class Player {
     })
 
     window.addEventListener('mouseup', function(){
-      active = false
+      activeVolume = false
     })
 
     // Timeline Events
@@ -222,11 +223,27 @@ class Player {
       }
     })
 
-    timeline.addEventListener('click', function(event) {
+    timeline.addEventListener('mousedown', function(event) {
+      player.pause()
+      activeTimeline = true
       let requestedPosition = event.offsetX / timeline.offsetWidth
       player.currentTime = player.duration * requestedPosition
       timelineBar.style.transform = 'scaleX(' + requestedPosition + ')'
-      player.play()
+    })
+
+    timeline.addEventListener('mousemove', function(event) {
+      if(activeTimeline) {
+      let requestedPosition = event.offsetX / timeline.offsetWidth
+      player.currentTime = player.duration * requestedPosition
+      timelineBar.style.transform = 'scaleX(' + requestedPosition + ')'
+      }
+    })
+
+    window.addEventListener('mouseup', function(){
+      if(activeTimeline) {
+        player.play()
+      }
+      activeTimeline = false
     })
   }
 }
