@@ -69,6 +69,7 @@ class Player {
     // Create currentTimer
     let currentTimer = document.createElement('div')
     currentTimer.className = 'currentTimer'
+    currentTimer.innerHTML = '0:00'
     controlBar.appendChild(currentTimer)
 
     // Create Timeline
@@ -93,7 +94,6 @@ class Player {
     // Set volume at start
     player.volume = 0.5
     volumeBar.style.transform = 'scaleX('+ player.volume + ')'
-
 
     // Events
 
@@ -203,9 +203,16 @@ class Player {
         currentTimer.innerHTML = ch + ':' + cm + ':' + cs
       }
     })
+
+    timeline.addEventListener('click', function(event) {
+      let requestedPosition = event.offsetX / timeline.offsetWidth
+      player.currentTime = player.duration * requestedPosition
+      timelineBar.style.transform = 'scaleX(' + requestedPosition + ')'
+      player.play()
+    })
   }
 }
 
 // Creating new Player
-let customPlayer = new Player({ basePath: './src/videos/', parent: '.player', id: '1', className: 'customPlayer', link: 'video.mp4', width: 400, height: 300, controls: true, autoplay: true})
-let customPlayer_2 = new Player({ basePath: './src/videos/', parent: '.player_2', id: '2', className: 'customPlayer', link: 'video.mp4', width: 400, height: 300, controls: true, autoplay: true})
+let customPlayer = new Player({ basePath: './src/videos/', parent: '.player', id: '1', className: 'customPlayer', link: 'video.mp4', width: 800, height: 525, controls: true, autoplay: true})
+// let customPlayer_2 = new Player({ basePath: './src/videos/', parent: '.player_2', id: '2', className: 'customPlayer', link: 'video.mp4', width: 400, height: 300, controls: true, autoplay: true})
