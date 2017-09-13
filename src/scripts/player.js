@@ -163,6 +163,20 @@ class Player {
     window.addEventListener('mouseup', function(){
       active = false
     })
+
+    // Timeline Events
+    player.addEventListener('timeupdate', function() {
+
+      // Display bar progression
+      let timelineBarProgression = player.currentTime / player.duration
+      timelineBar.style.transform = 'scaleX(' + timelineBarProgression + ')'
+
+      if(player.currentTime < 10) {
+        console.log('0' + Math.floor(player.currentTime) + ' / ' + Math.floor(player.duration))
+      } else {
+        console.log(Math.floor(player.currentTime) + '/' + Math.floor(player.duration))
+      }
+    })
   }
 }
 
