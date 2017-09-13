@@ -66,6 +66,16 @@ class Player {
 
     let active = false
 
+    // Create Timeline
+    let timeline = document.createElement('div')
+    timeline.className = 'timeline'
+    controlBar.appendChild(timeline)
+
+    // Create Timeline Bar
+    let timelineBar = document.createElement('div')
+    timelineBar.className = 'timelineBar'
+    timeline.appendChild(timelineBar)
+
     // Check at start
 
     // Check Video Status to display the right button
