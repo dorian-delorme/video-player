@@ -33,9 +33,12 @@ class Player {
   }
 
   createControllers() {
+
     // Target the player
     let player = document.getElementById(this.id)
 
+    // Build Elements
+      
     // Create control bar
     let controlBar = document.createElement('div')
     controlBar.className = 'controlBar'
@@ -46,6 +49,25 @@ class Player {
     playPauseButton.className = 'playPauseButton'
     controlBar.appendChild(playPauseButton)
 
+    // Create Mute Button
+    let muteButton = document.createElement('div')
+    muteButton.className = 'muteButton'
+    controlBar.appendChild(muteButton)
+
+    // Create Volume Slider
+    let volumeController = document.createElement('div')
+    volumeController.className = 'volumeController'
+    controlBar.appendChild(volumeController)
+
+    // Create Volume Bar inside Volume Slider
+    let volumeBar = document.createElement('div')
+    volumeBar.className = 'volumeBar'
+    volumeController.appendChild(volumeBar)
+
+    let active = false
+
+    // Check at start
+
     // Check Video Status to display the right button
     if(player.autoplay) {
       playPauseButton.classList.add('isPlaying')
@@ -53,6 +75,14 @@ class Player {
       playPauseButton.classList.remove('isPlaying')
     }
 
+    // Set volume at start
+    player.volume = 0.5
+    volumeBar.style.transform = 'scaleX('+ player.volume + ')'
+
+
+    // Events
+
+    // PlayPause Events
     let playPauseEvents = [player, playPauseButton]
     playPauseEvents.forEach(function(e) {
       e.addEventListener('click', function() {
@@ -78,13 +108,7 @@ class Player {
       }
     })
 
-    // Volume
-
-    // Mute Button
-    let muteButton = document.createElement('div')
-    muteButton.className = 'muteButton'
-    controlBar.appendChild(muteButton)
-
+    // Volume Events
     muteButton.addEventListener('click', function() {
       let volumeSaved = 0;
       if (!muteButton.classList.contains('isMuted')) {
@@ -96,19 +120,6 @@ class Player {
         muteButton.classList.toggle('isMuted')
       }
     })
-
-    // Volume Slider
-    let volumeController = document.createElement('div')
-    volumeController.className = 'volumeController'
-    controlBar.appendChild(volumeController)
-
-    let volumeBar = document.createElement('div')
-    volumeBar.className = 'volumeBar'
-    volumeController.appendChild(volumeBar)
-    player.volume = 0.5
-    volumeBar.style.transform = 'scaleX('+ player.volume + ')'
-
-    let active = false
 
     volumeController.addEventListener('mousedown', function(event) {
       active = true
@@ -146,6 +157,5 @@ class Player {
 }
 
 // Creating new Player
-
 let customPlayer = new Player({ basePath: './src/videos/', parent: '.player', id: '1', className: 'customPlayer', link: 'video.mp4', width: 400, height: 300, controls: true, autoplay: true})
 let customPlayer_2 = new Player({ basePath: './src/videos/', parent: '.player_2', id: '2', className: 'customPlayer', link: 'video.mp4', width: 400, height: 300, controls: true, autoplay: true})
