@@ -82,6 +82,12 @@ class Player {
     timelineBar.className = 'timelineBar'
     timeline.appendChild(timelineBar)
 
+    // Create durationTimer
+    let durationTimer = document.createElement('div')
+    durationTimer.className = 'durationTimer'
+    durationTimer.innerHTML = '0:00'
+    controlBar.appendChild(durationTimer)
+
     // Check at start
 
     // Check Video Status to display the right button
@@ -190,17 +196,29 @@ class Player {
       let cm = currentTimeFormated.getMinutes()
       let ch = currentTimeFormated.getUTCHours()
 
+      // Checks for currentTime display
       if(cs >= 0 && cs < 10) {
         cs = '0' + cs
       }
-      if(ch > 0 && (cm === 0 && cm < 10 )) {
+      if(ch > 0 && (cm === 0 && cm < 10)) {
         cm = '0' + cm
       }
 
+      // Checks for durationTime display
+      if(ds >= 0 && ds < 10) {
+        ds = '0' + ds
+      }
+      if(dh > 0 && (dm === 0 && dm < 10)) {
+        dm = '0' + cm
+      }
+
+      //
       if(dh === 0 || ch === 0) {
         currentTimer.innerHTML = cm + ':' + cs
+        durationTimer.innerHTML = dm + ':' + ds
       } else {
         currentTimer.innerHTML = ch + ':' + cm + ':' + cs
+        durationTimer.innerHTML = dh + ':' + dm + ':' + ds
       }
     })
 
