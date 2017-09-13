@@ -106,3 +106,10 @@ body {
 	transform-origin: 0 0;
 	transform: scaleX(0);
 }
+
+.currentTimer {
+	font-family: sans-serif;
+	font-size: .7em;
+	margin-left: 10px !important;
+	color: white;
+}

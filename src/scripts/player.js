@@ -66,6 +66,11 @@ class Player {
 
     let active = false
 
+    // Create currentTimer
+    let currentTimer = document.createElement('div')
+    currentTimer.className = 'currentTimer'
+    controlBar.appendChild(currentTimer)
+
     // Create Timeline
     let timeline = document.createElement('div')
     timeline.className = 'timeline'
@@ -171,10 +176,31 @@ class Player {
       let timelineBarProgression = player.currentTime / player.duration
       timelineBar.style.transform = 'scaleX(' + timelineBarProgression + ')'
 
-      if(player.currentTime < 10) {
-        console.log('0' + Math.floor(player.currentTime) + ' / ' + Math.floor(player.duration))
+      // Display time formated
+      let durationTimeFormated = new Date(null)
+      durationTimeFormated.setSeconds(Math.floor(player.duration))
+      let ds = durationTimeFormated.getSeconds()
+      let dm = durationTimeFormated.getMinutes()
+      let dh = durationTimeFormated.getUTCHours()
+
+      let currentTimeFormated = new Date(null)
+      currentTimeFormated.setSeconds(Math.floor(player.currentTime))
+
+      let cs = currentTimeFormated.getSeconds()
+      let cm = currentTimeFormated.getMinutes()
+      let ch = currentTimeFormated.getUTCHours()
+
+      if(cs >= 0 && cs < 10) {
+        cs = '0' + cs
+      }
+      if(ch > 0 && (cm === 0 && cm < 10 )) {
+        cm = '0' + cm
+      }
+
+      if(dh === 0 || ch === 0) {
+        currentTimer.innerHTML = cm + ':' + cs
       } else {
-        console.log(Math.floor(player.currentTime) + '/' + Math.floor(player.duration))
+        currentTimer.innerHTML = ch + ':' + cm + ':' + cs
       }
     })
   }
