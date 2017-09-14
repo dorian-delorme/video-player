@@ -36,8 +36,6 @@ class Player {
 
     // Target the player
     let player = document.getElementById(this.id)
-
-    // Build Elements
       
     // Create control bar
     let controlBar = document.createElement('div')
@@ -78,6 +76,7 @@ class Player {
     controlBar.appendChild(timeline)
     let activeTimeline = false
 
+    // Create vars for lerp
     let position = 0
     let amount = 0.1
 
