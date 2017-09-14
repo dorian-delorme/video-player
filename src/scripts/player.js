@@ -80,6 +80,11 @@ class Player {
     let position = 0
     let amount = 0.1
 
+    // Create TimelineLoadingBar
+    let timelineLoadingBar = document.createElement('div')
+    timelineLoadingBar.className = 'timelineLoadingBar'
+    timeline.appendChild(timelineLoadingBar)
+
     // Create Timeline Bar
     let timelineBar = document.createElement('div')
     timelineBar.className = 'timelineBar'
@@ -191,6 +196,10 @@ class Player {
         timelineBarProgression = position / player.duration
         timelineBar.style.transform = 'scaleX(' + timelineBarProgression + ')'
       }
+
+      // Display on timeline what is already loaded
+      timelineLoadingBar.style.transform = 'scaleX(' + player.buffered.end(0) / player.duration + ')'
+
     }, 16);
 
     player.addEventListener('timeupdate', function() {
