@@ -78,6 +78,9 @@ class Player {
     controlBar.appendChild(timeline)
     let activeTimeline = false
 
+    let position = 0
+    let amount = 0.1
+
     // Create Timeline Bar
     let timelineBar = document.createElement('div')
     timelineBar.className = 'timelineBar'
@@ -99,7 +102,7 @@ class Player {
     }
 
     // Set volume at start
-    player.volume = 0.5
+    player.volume = 0
     volumeBar.style.transform = 'scaleX('+ player.volume + ')'
 
     // Events
@@ -177,11 +180,21 @@ class Player {
     })
 
     // Timeline Events
-    player.addEventListener('timeupdate', function() {
-
-      // Display bar progression
+    setInterval(function barProgression(){
+          // Display bar progression
       let timelineBarProgression = player.currentTime / player.duration
-      timelineBar.style.transform = 'scaleX(' + timelineBarProgression + ')'
+
+      if(position === 0) {
+        timelineBar.style.transform = 'scaleX(' + timelineBarProgression + ')'
+        position += player.currentTime
+      } else {
+        position += (player.currentTime - position) * amount
+        timelineBarProgression = position / player.duration
+        timelineBar.style.transform = 'scaleX(' + timelineBarProgression + ')'
+      }
+    }, 16);
+
+    player.addEventListener('timeupdate', function() {
 
       // Display time formated
       let durationTimeFormated = new Date(null)
@@ -225,10 +238,12 @@ class Player {
 
     timeline.addEventListener('mousedown', function(event) {
       player.pause()
+      timelineBar.classList.add('isTransiting')
       activeTimeline = true
       let requestedPosition = event.offsetX / timeline.offsetWidth
       player.currentTime = player.duration * requestedPosition
       timelineBar.style.transform = 'scaleX(' + requestedPosition + ')'
+      position = player.currentTime
     })
 
     timeline.addEventListener('mousemove', function(event) {
@@ -236,11 +251,13 @@ class Player {
       let requestedPosition = event.offsetX / timeline.offsetWidth
       player.currentTime = player.duration * requestedPosition
       timelineBar.style.transform = 'scaleX(' + requestedPosition + ')'
+      position = player.currentTime
       }
     })
 
     window.addEventListener('mouseup', function(){
       if(activeTimeline) {
+        timelineBar.classList.remove('isTransiting')
         player.play()
         playPauseButton.classList.add('isPlaying')
         activeTimeline = false
