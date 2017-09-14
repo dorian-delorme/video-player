@@ -38,9 +38,15 @@ body {
 	cursor: pointer;
 	margin-left: 10px;
 	width: 10px;
+	min-width: 10px;
 	height: 10px;
+	min-height: 10px;
 	transition: all 200ms ease;
 	background-color: black;
+}
+
+.playPauseButton:hover {
+	transform: scale(1.1);
 }
 
 .isPlaying {
@@ -50,9 +56,16 @@ body {
 .muteButton {
 	width: 10px;
 	height: 10px;
+	min-width: 10px;
+	min-height: 10px;
 	background-color: white;
 	margin-left: 10px !important;
 	transition: all 200ms ease;
+	cursor: pointer;
+}
+
+.muteButton:hover {
+	transform: scale(1.1);
 }
 
 .isMuted {
@@ -128,10 +141,34 @@ body {
 .durationTimer {
 	font-family: sans-serif;
 	font-size: .7em;
-	margin: 0 10px !important;
+	margin-left: 10px !important;
 	color: white;
 }
 
 .isTransiting {
 	transition: all 100ms ease; 
+}
+
+.fullscreenButton {
+	width: 10px;
+	height: 10px;
+	min-width: 10px;
+	min-height: 10px;
+	background-color: white;
+	margin: 0 10px !important;
+	cursor: pointer;
+	transition: all 200ms ease;
+}
+
+.fullscreenButton:hover {
+	transform: scale(1.1);
+}
+
+.fullscreenIsActive {
+	background-color: black;
+}
+
+/*Hide controls*/
+::-webkit-media-controls {
+  display:none !important;
 }

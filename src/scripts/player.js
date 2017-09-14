@@ -21,6 +21,7 @@ class Player {
     myPlayer.autoplay  = this.autoplay
     myPlayer.width     = this.width
     myPlayer.height    = this.height
+    myPlayer.controls  = false
 
     this.parent.appendChild(myPlayer)
 
@@ -95,6 +96,11 @@ class Player {
     durationTimer.className = 'durationTimer'
     durationTimer.innerHTML = '0:00'
     controlBar.appendChild(durationTimer)
+
+    // Create fullscreenButton
+    let fullscreenButton = document.createElement('div')
+    fullscreenButton.className = 'fullscreenButton'
+    controlBar.appendChild(fullscreenButton)
 
     // Check at start
 
@@ -269,6 +275,18 @@ class Player {
         player.play()
         playPauseButton.classList.add('isPlaying')
         activeTimeline = false
+      }
+    })
+
+    // Fullscreen
+    fullscreenButton.addEventListener('click', function(e) {
+      player.requestFullscreen
+      if (player.requestFullscreen) {
+        player.requestFullscreen();
+      } else if (player.mozRequestFullScreen) {
+        player.mozRequestFullScreen();
+      } else if (player.webkitRequestFullscreen) {
+        player.webkitRequestFullscreen();
       }
     })
   }
