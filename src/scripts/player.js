@@ -13,17 +13,24 @@ class Player {
     this.id        = params.id
     this.className = params.className
 
-    let myPlayer = document.createElement('video')
+    this.playerContainer = document.createElement('div')
 
-    myPlayer.src       = this.link
-    myPlayer.id        = this.id
-    myPlayer.className = this.className
-    myPlayer.autoplay  = this.autoplay
-    myPlayer.width     = this.width
-    myPlayer.height    = this.height
-    myPlayer.controls  = false
+    this.playerContainer.className = 'playerContainer'
+    this.playerContainer.tabIndex  = 0;
+    this.playerContainer.width     = this.width
+    this.playerContainer.height    = 'auto'
+    this.parent.appendChild(this.playerContainer)
 
-    this.parent.appendChild(myPlayer)
+    this.player = document.createElement('video')
+
+    this.player.src       = this.link
+    this.player.id        = this.id
+    this.player.className = this.className
+    this.player.autoplay  = this.autoplay
+    this.player.width     = this.playerContainer.width
+    this.player.controls  = false
+
+    this.playerContainer.appendChild(this.player)
 
     // Check if controls are required
     if (params.controls) {
@@ -35,13 +42,13 @@ class Player {
 
   createControllers() {
 
-    // Target the player
-    let player = document.getElementById(this.id)
+    let player = this.player
+    let playerContainer = this.playerContainer
       
     // Create control bar
     let controlBar = document.createElement('div')
     controlBar.className = 'controlBar'
-    this.parent.appendChild(controlBar)
+    playerContainer.appendChild(controlBar)
 
     // Create play/pause button
     let playPauseButton = document.createElement('div')
@@ -280,18 +287,36 @@ class Player {
 
     // Fullscreen
     fullscreenButton.addEventListener('click', function(e) {
-      player.requestFullscreen
-      if (player.requestFullscreen) {
-        player.requestFullscreen();
-      } else if (player.mozRequestFullScreen) {
-        player.mozRequestFullScreen();
-      } else if (player.webkitRequestFullscreen) {
-        player.webkitRequestFullscreen();
+      if(!playerContainer.classList.contains('fullscreenMode')) {
+        playerContainer.requestFullscreen
+        if(playerContainer.requestFullscreen) {
+          playerContainer.requestFullscreen();
+          playerContainer.classList.add('fullscreenMode')
+          player.classList.add('fullscreenMode')
+        } else if (playerContainer.mozRequestFullScreen) {
+          playerContainer.mozRequestFullScreen();
+          playerContainer.classList.add('fullscreenMode')
+          player.classList.add('fullscreenMode')
+        } else if (playerContainer.webkitRequestFullscreen) {
+          playerContainer.webkitRequestFullscreen();
+          playerContainer.classList.add('fullscreenMode')
+          player.classList.add('fullscreenMode')
+        }
+      } else {
+        document.cancelFullscreen
+        if (document.cancelFullScreen) {
+          document.cancelFullScreen();
+        } else if (document.mozCancelFullScreen) {
+          document.mozCancelFullScreen();
+        } else if (document.webkitCancelFullScreen) {
+          document.webkitCancelFullScreen();
+        }
+        playerContainer.classList.remove('fullscreenMode')
+        player.classList.remove('fullscreenMode')
       }
     })
   }
 }
 
 // Creating new Player
-let customPlayer = new Player({ basePath: './src/videos/', parent: '.player', id: '1', className: 'customPlayer', link: 'video.mp4', width: 800, height: 525, controls: true, autoplay: true})
-// let customPlayer_2 = new Player({ basePath: './src/videos/', parent: '.player_2', id: '2', className: 'customPlayer', link: 'video.mp4', width: 400, height: 300, controls: true, autoplay: true})
+let customPlayer = new Player({ basePath: './src/videos/', parent: '.container', id: '1', className: 'customPlayer', link: 'video.mp4', width: 800, height: 'auto', controls: true, autoplay: true})

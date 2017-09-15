@@ -12,14 +12,10 @@ body {
 	min-height: 100vh;
 }
 
-.player {
+.playerContainer {
 	position: relative;
 	outline: none;
-}
-
-.player_2 {
-	position: relative;
-	outline: none;
+	line-height: 0;
 }
 
 .controlBar {
@@ -166,6 +162,12 @@ body {
 
 .fullscreenIsActive {
 	background-color: black;
+}
+
+.fullscreenMode {
+	background-color: black;
+	width: 100% !important;
+	height: 100% !important;
 }
 
 /*Hide controls*/
