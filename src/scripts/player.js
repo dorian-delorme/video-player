@@ -311,6 +311,29 @@ class Player {
       }
     })
 
+    // Fullscreen on double click
+    player.addEventListener('dblclick', function(e) {
+      if(!fullscreenMode) {
+        if (playerContainer.requestFullscreen) {
+          playerContainer.requestFullscreen();
+        } else if (playerContainer.mozRequestFullScreen) {
+          playerContainer.mozRequestFullScreen();
+        } else if (playerContainer.webkitRequestFullscreen) {
+          playerContainer.webkitRequestFullscreen();
+        }
+        fullscreenMode = true
+      } else {
+        if (document.cancelFullScreen) {
+          document.cancelFullScreen();
+        } else if (document.mozCancelFullScreen) {
+          document.mozCancelFullScreen();
+        } else if (document.webkitCancelFullScreen) {
+          document.webkitCancelFullScreen();
+        }
+        fullscreenMode = false
+      }
+    })
+
     let isFullscreen = false;
 
     const fullscreenEvents = ["fullscreenchange", "webkitfullscreenchange", "mozfullscreenchange", "msfullscreenchange"]
