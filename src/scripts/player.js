@@ -164,10 +164,10 @@ class Player {
 
     // Volume Events
     muteButton.addEventListener('click', function() {
-      let volumeSaved = 0;
+      let volumeSaved = 0
       if (!muteButton.classList.contains('isMuted')) {
         this.volumeSaved = player.volume
-        player.volume = 0;
+        player.volume = 0
         muteButton.classList.toggle('isMuted')
       } else {
         player.volume = this.volumeSaved
@@ -225,7 +225,7 @@ class Player {
       // Display on timeline what is already loaded
       timelineLoadingBar.style.transform = 'scaleX(' + player.buffered.end(0) / player.duration + ')'
 
-    }, 16);
+    }, 16)
 
     player.addEventListener('timeupdate', function() {
 
@@ -301,20 +301,20 @@ class Player {
     fullscreenButton.addEventListener('click', function(e) {
       if (!fullscreenMode) {
         if (playerContainer.requestFullscreen) {
-          playerContainer.requestFullscreen();
+          playerContainer.requestFullscreen()
         } else if (playerContainer.mozRequestFullScreen) {
-          playerContainer.mozRequestFullScreen();
+          playerContainer.mozRequestFullScreen()
         } else if (playerContainer.webkitRequestFullscreen) {
-          playerContainer.webkitRequestFullscreen();
+          playerContainer.webkitRequestFullscreen()
         }
         fullscreenMode = true
       } else {
         if (document.cancelFullScreen) {
-          document.cancelFullScreen();
+          document.cancelFullScreen()
         } else if (document.mozCancelFullScreen) {
-          document.mozCancelFullScreen();
+          document.mozCancelFullScreen()
         } else if (document.webkitCancelFullScreen) {
-          document.webkitCancelFullScreen();
+          document.webkitCancelFullScreen()
         }
         fullscreenMode = false
       }
@@ -324,26 +324,26 @@ class Player {
     player.addEventListener('dblclick', function(e) {
       if (!fullscreenMode) {
         if (playerContainer.requestFullscreen) {
-          playerContainer.requestFullscreen();
+          playerContainer.requestFullscreen()
         } else if (playerContainer.mozRequestFullScreen) {
-          playerContainer.mozRequestFullScreen();
+          playerContainer.mozRequestFullScreen()
         } else if (playerContainer.webkitRequestFullscreen) {
-          playerContainer.webkitRequestFullscreen();
+          playerContainer.webkitRequestFullscreen()
         }
         fullscreenMode = true
       } else {
         if (document.cancelFullScreen) {
-          document.cancelFullScreen();
+          document.cancelFullScreen()
         } else if (document.mozCancelFullScreen) {
-          document.mozCancelFullScreen();
+          document.mozCancelFullScreen()
         } else if (document.webkitCancelFullScreen) {
-          document.webkitCancelFullScreen();
+          document.webkitCancelFullScreen()
         }
         fullscreenMode = false
       }
     })
 
-    let isFullscreen = false;
+    let isFullscreen = false
 
     const fullscreenEvents = ["fullscreenchange", "webkitfullscreenchange", "mozfullscreenchange", "msfullscreenchange"]
     fullscreenEvents.forEach(function(event) {
