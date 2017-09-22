@@ -41,11 +41,11 @@ class Player {
 
     this.playerContainer.appendChild(this.player)
 
-    // Check ifcontrols are required
+    // Check if controls are required
     if (params.controls) {
       this.createControllers()
     } else {
-      console.log('To enable controllers turn controls to true')
+      console.log('To enable controllers turn controls paramaters to true')
     }
   }
 
