@@ -3,35 +3,45 @@
 // Work In Progress
 
 class Player {
-  constructor(params = { basePath, parent, id, className, link, width, height, controls, autoplay}) {
+  constructor(params = {
+    basePath,
+    parent,
+    id,
+    className,
+    link,
+    width,
+    height,
+    controls,
+    autoplay
+  }) {
 
-    this.parent    = document.querySelector(params.parent)
-    this.link      = params.basePath + params.link
-    this.width     = params.width
-    this.height    = params.height
-    this.autoplay  = params.autoplay
-    this.id        = params.id
+    this.parent = document.querySelector(params.parent)
+    this.link = params.basePath + params.link
+    this.width = params.width
+    this.height = params.height
+    this.autoplay = params.autoplay
+    this.id = params.id
     this.className = params.className
 
     this.playerContainer = document.createElement('div')
 
     this.playerContainer.className = 'playerContainer'
-    this.playerContainer.tabIndex  = 0;
-    this.playerContainer.style.width     = this.width + 'px'
-    this.playerContainer.style.height    = 'auto'
+    this.playerContainer.tabIndex = 0
+    this.playerContainer.style.width = this.width + 'px'
+    this.playerContainer.style.height = 'auto'
     this.parent.appendChild(this.playerContainer)
 
     this.player = document.createElement('video')
 
-    this.player.src       = this.link
-    this.player.id        = this.id
+    this.player.src = this.link
+    this.player.id = this.id
     this.player.className = this.className
-    this.player.autoplay  = this.autoplay
-    this.player.controls  = false
+    this.player.autoplay = this.autoplay
+    this.player.controls = false
 
     this.playerContainer.appendChild(this.player)
 
-    // Check if controls are required
+    // Check ifcontrols are required
     if (params.controls) {
       this.createControllers()
     } else {
@@ -43,7 +53,8 @@ class Player {
 
     let player = this.player
     let playerContainer = this.playerContainer
-      
+    let parent = this.parent
+
     // Create control bar
     let controlBar = document.createElement('div')
     controlBar.className = 'controlBar'
@@ -113,7 +124,7 @@ class Player {
     // Check at start
 
     // Check Video Status to display the right button
-    if(player.autoplay) {
+    if (player.autoplay) {
       playPauseButton.classList.add('isPlaying')
     } else {
       playPauseButton.classList.remove('isPlaying')
@@ -121,7 +132,7 @@ class Player {
 
     // Set volume at start
     player.volume = 0
-    volumeBar.style.transform = 'scaleX('+ player.volume + ')'
+    volumeBar.style.transform = 'scaleX(' + player.volume + ')'
 
     // Events
 
@@ -129,7 +140,7 @@ class Player {
     let playPauseEvents = [player, playPauseButton]
     playPauseEvents.forEach(function(e) {
       e.addEventListener('click', function() {
-        if(player.paused) {
+        if (player.paused) {
           player.play()
           playPauseButton.classList.add('isPlaying')
         } else {
@@ -139,9 +150,9 @@ class Player {
       })
     })
 
-    this.parent.addEventListener('keydown', function(e) {
+    parent.addEventListener('keydown', function(e) {
       if (e.keyCode === 32) {
-        if(player.paused) {
+        if (player.paused) {
           player.play()
           playPauseButton.classList.add('isPlaying')
         } else {
@@ -167,21 +178,21 @@ class Player {
     volumeController.addEventListener('mousedown', function(event) {
       activeVolume = true
       muteButton.classList.remove('isMuted')
-        if( 0.1 <= event.offsetX / volumeController.offsetWidth && event.offsetX / volumeController.offsetWidth <= 0.9) {
-          player.volume = event.offsetX / volumeController.offsetWidth
-        } else if (event.offsetX / volumeController.offsetWidth < 0.1) {
-          player.volume = 0
-          muteButton.classList.add('isMuted')
-        } else {
-          player.volume = 1
-        }
-        volumeBar.style.transform = 'scaleX(' + player.volume + ')'
+      if (0.1 <= event.offsetX / volumeController.offsetWidth && event.offsetX / volumeController.offsetWidth <= 0.9) {
+        player.volume = event.offsetX / volumeController.offsetWidth
+      } else if (event.offsetX / volumeController.offsetWidth < 0.1) {
+        player.volume = 0
+        muteButton.classList.add('isMuted')
+      } else {
+        player.volume = 1
+      }
+      volumeBar.style.transform = 'scaleX(' + player.volume + ')'
     })
 
     volumeController.addEventListener('mousemove', function(event) {
-      if(activeVolume) {
-       muteButton.classList.remove('isMuted')
-        if( 0.1 <= event.offsetX / volumeController.offsetWidth && event.offsetX / volumeController.offsetWidth <= 0.9) {
+      if (activeVolume) {
+        muteButton.classList.remove('isMuted')
+        if (0.1 <= event.offsetX / volumeController.offsetWidth && event.offsetX / volumeController.offsetWidth <= 0.9) {
           player.volume = event.offsetX / volumeController.offsetWidth
         } else if (event.offsetX / volumeController.offsetWidth < 0.1) {
           player.volume = 0
@@ -193,16 +204,16 @@ class Player {
       }
     })
 
-    window.addEventListener('mouseup', function(){
+    window.addEventListener('mouseup', function() {
       activeVolume = false
     })
 
     // Timeline Events
-    setInterval(function barProgression(){
+    setInterval(function barProgression() {
       // Display bar progression
       let timelineBarProgression = player.currentTime / player.duration
 
-      if(position === 0) {
+      if (position === 0) {
         timelineBar.style.transform = 'scaleX(' + timelineBarProgression + ')'
         position += player.currentTime
       } else {
@@ -213,8 +224,6 @@ class Player {
 
       // Display on timeline what is already loaded
       timelineLoadingBar.style.transform = 'scaleX(' + player.buffered.end(0) / player.duration + ')'
-
-      // console.log(fullscreenMode);
 
     }, 16);
 
@@ -235,23 +244,23 @@ class Player {
       let ch = currentTimeFormated.getUTCHours()
 
       // Checks for currentTime display
-      if(cs >= 0 && cs < 10) {
+      if (cs >= 0 && cs < 10)  {
         cs = '0' + cs
       }
-      if(ch > 0 && (cm === 0 && cm < 10)) {
+      if (ch > 0 && (cm === 0 && cm < 10)) {
         cm = '0' + cm
       }
 
       // Checks for durationTime display
-      if(ds >= 0 && ds < 10) {
+      if (ds >= 0 && ds < 10) {
         ds = '0' + ds
       }
-      if(dh > 0 && (dm === 0 && dm < 10)) {
+      if (dh > 0 && (dm === 0 && dm < 10)) {
         dm = '0' + cm
       }
 
       //
-      if(dh === 0 || ch === 0) {
+      if (dh === 0 || ch === 0) {
         currentTimer.innerHTML = cm + ':' + cs
         durationTimer.innerHTML = dm + ':' + ds
       } else {
@@ -271,16 +280,16 @@ class Player {
     })
 
     timeline.addEventListener('mousemove', function(event) {
-      if(activeTimeline) {
-      let requestedPosition = event.offsetX / timeline.offsetWidth
-      player.currentTime = player.duration * requestedPosition
-      timelineBar.style.transform = 'scaleX(' + requestedPosition + ')'
-      position = player.currentTime
+      if (activeTimeline) {
+        let requestedPosition = event.offsetX / timeline.offsetWidth
+        player.currentTime = player.duration * requestedPosition
+        timelineBar.style.transform = 'scaleX(' + requestedPosition + ')'
+        position = player.currentTime
       }
     })
 
-    window.addEventListener('mouseup', function(){
-      if(activeTimeline) {
+    window.addEventListener('mouseup', function() {
+      if (activeTimeline) {
         timelineBar.classList.remove('isTransiting')
         player.play()
         playPauseButton.classList.add('isPlaying')
@@ -290,7 +299,7 @@ class Player {
 
     // Fullscreen
     fullscreenButton.addEventListener('click', function(e) {
-      if(!fullscreenMode) {
+      if (!fullscreenMode) {
         if (playerContainer.requestFullscreen) {
           playerContainer.requestFullscreen();
         } else if (playerContainer.mozRequestFullScreen) {
@@ -313,7 +322,7 @@ class Player {
 
     // Fullscreen on double click
     player.addEventListener('dblclick', function(e) {
-      if(!fullscreenMode) {
+      if (!fullscreenMode) {
         if (playerContainer.requestFullscreen) {
           playerContainer.requestFullscreen();
         } else if (playerContainer.mozRequestFullScreen) {
@@ -337,11 +346,10 @@ class Player {
     let isFullscreen = false;
 
     const fullscreenEvents = ["fullscreenchange", "webkitfullscreenchange", "mozfullscreenchange", "msfullscreenchange"]
-    fullscreenEvents.forEach( function(event) {
+    fullscreenEvents.forEach(function(event) {
       document.addEventListener(event, function() {
-        console.log(isFullscreen);
         isFullscreen = !isFullscreen
-        if(!isFullscreen) {
+        if (!isFullscreen) {
           fullscreenMode = false
         }
       })
@@ -350,4 +358,14 @@ class Player {
 }
 
 // Creating new Player
-let customPlayer = new Player({ basePath: './src/videos/', parent: '.container', id: '1', className: 'customPlayer', link: 'video.mp4', width: 300, height: 'auto', controls: true, autoplay: true})
+let customPlayer = new Player({
+  basePath: './src/videos/',
+  parent: '.container',
+  id: '1',
+  className: 'customPlayer',
+  link: 'video.mp4',
+  width: 800,
+  height: 'auto',
+  controls: true,
+  autoplay: true
+})
