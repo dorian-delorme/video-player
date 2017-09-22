@@ -17,8 +17,8 @@ class Player {
 
     this.playerContainer.className = 'playerContainer'
     this.playerContainer.tabIndex  = 0;
-    this.playerContainer.width     = this.width
-    this.playerContainer.height    = 'auto'
+    this.playerContainer.style.width     = this.width + 'px'
+    this.playerContainer.style.height    = 'auto'
     this.parent.appendChild(this.playerContainer)
 
     this.player = document.createElement('video')
@@ -350,4 +350,4 @@ class Player {
 }
 
 // Creating new Player
-let customPlayer = new Player({ basePath: './src/videos/', parent: '.container', id: '1', className: 'customPlayer', link: 'video.mp4', width: 800, height: 'auto', controls: true, autoplay: true})
+let customPlayer = new Player({ basePath: './src/videos/', parent: '.container', id: '1', className: 'customPlayer', link: 'video.mp4', width: 300, height: 'auto', controls: true, autoplay: true})
