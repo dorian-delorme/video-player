@@ -27,7 +27,6 @@ class Player {
     this.player.id        = this.id
     this.player.className = this.className
     this.player.autoplay  = this.autoplay
-    this.player.width     = this.playerContainer.width
     this.player.controls  = false
 
     this.playerContainer.appendChild(this.player)
@@ -108,6 +107,8 @@ class Player {
     let fullscreenButton = document.createElement('div')
     fullscreenButton.className = 'fullscreenButton'
     controlBar.appendChild(fullscreenButton)
+
+    let fullscreenMode = false
 
     // Check at start
 
@@ -198,7 +199,7 @@ class Player {
 
     // Timeline Events
     setInterval(function barProgression(){
-          // Display bar progression
+      // Display bar progression
       let timelineBarProgression = player.currentTime / player.duration
 
       if(position === 0) {
@@ -212,6 +213,8 @@ class Player {
 
       // Display on timeline what is already loaded
       timelineLoadingBar.style.transform = 'scaleX(' + player.buffered.end(0) / player.duration + ')'
+
+      // console.log(fullscreenMode);
 
     }, 16);
 
@@ -287,23 +290,16 @@ class Player {
 
     // Fullscreen
     fullscreenButton.addEventListener('click', function(e) {
-      if(!playerContainer.classList.contains('fullscreenMode')) {
-        playerContainer.requestFullscreen
-        if(playerContainer.requestFullscreen) {
+      if(!fullscreenMode) {
+        if (playerContainer.requestFullscreen) {
           playerContainer.requestFullscreen();
-          playerContainer.classList.add('fullscreenMode')
-          player.classList.add('fullscreenMode')
         } else if (playerContainer.mozRequestFullScreen) {
           playerContainer.mozRequestFullScreen();
-          playerContainer.classList.add('fullscreenMode')
-          player.classList.add('fullscreenMode')
         } else if (playerContainer.webkitRequestFullscreen) {
           playerContainer.webkitRequestFullscreen();
-          playerContainer.classList.add('fullscreenMode')
-          player.classList.add('fullscreenMode')
         }
+        fullscreenMode = true
       } else {
-        document.cancelFullscreen
         if (document.cancelFullScreen) {
           document.cancelFullScreen();
         } else if (document.mozCancelFullScreen) {
@@ -311,9 +307,21 @@ class Player {
         } else if (document.webkitCancelFullScreen) {
           document.webkitCancelFullScreen();
         }
-        playerContainer.classList.remove('fullscreenMode')
-        player.classList.remove('fullscreenMode')
+        fullscreenMode = false
       }
+    })
+
+    let isFullscreen = false;
+
+    const fullscreenEvents = ["fullscreenchange", "webkitfullscreenchange", "mozfullscreenchange", "msfullscreenchange"]
+    fullscreenEvents.forEach( function(event) {
+      document.addEventListener(event, function() {
+        console.log(isFullscreen);
+        isFullscreen = !isFullscreen
+        if(!isFullscreen) {
+          fullscreenMode = false
+        }
+      })
     })
   }
 }
