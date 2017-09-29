@@ -12,7 +12,8 @@ class Player {
     width,
     height,
     controls,
-    autoplay
+    autoplay,
+    loop
   }) {
 
     this.parent = document.querySelector(params.parent)
@@ -20,6 +21,7 @@ class Player {
     this.width = params.width
     this.height = params.height
     this.autoplay = params.autoplay
+    this.loop = params.loop
     this.id = params.id
     this.className = params.className
 
@@ -38,6 +40,7 @@ class Player {
     this.player.className = this.className
     this.player.autoplay = this.autoplay
     this.player.controls = false
+    this.player.loop = this.loop
 
     this.playerContainer.appendChild(this.player)
 
@@ -367,5 +370,6 @@ let customPlayer = new Player({
   width: 800,
   height: 'auto',
   controls: true,
-  autoplay: true
+  autoplay: true,
+  loop: true
 })
