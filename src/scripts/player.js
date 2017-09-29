@@ -63,6 +63,8 @@ class Player {
     controlBar.className = 'controlBar'
     playerContainer.appendChild(controlBar)
 
+    let controlBarDisplay = [player, controlBar]
+
     // Create play/pause button
     let playPauseButton = document.createElement('div')
     playPauseButton.className = 'playPauseButton'
@@ -355,6 +357,20 @@ class Player {
         if (!isFullscreen) {
           fullscreenMode = false
         }
+      })
+    })
+
+    // Display ControlBar correctly
+
+    controlBarDisplay.forEach(function(e) {
+      e.addEventListener('mouseover', function() {
+        controlBar.classList.add('controlBarIsActive')
+      })
+    })
+
+    controlBarDisplay.forEach(function(e) {
+      e.addEventListener('mouseleave', function() {
+        controlBar.classList.remove('controlBarIsActive')
       })
     })
   }
