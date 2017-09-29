@@ -136,7 +136,7 @@ class Player {
     }
 
     // Set volume at start
-    player.volume = 0
+    player.volume = 0.5
     volumeBar.style.transform = 'scaleX(' + player.volume + ')'
 
     // Events
@@ -387,5 +387,5 @@ let customPlayer = new Player({
   height: 'auto',
   controls: true,
   autoplay: true,
-  loop: true
+  loop: false
 })
