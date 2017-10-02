@@ -43,6 +43,10 @@ video {
 	pointer-events: auto;
 }
 
+.cursorIsRemoved {
+	cursor: none;
+}
+
 .playPauseButton {
 	cursor: pointer;
 	margin-left: 10px;
@@ -188,9 +192,4 @@ video {
 	width: 100% !important;
 	height: 100% !important;
 	background-color: black;
-}
-
-
-.cursorIsRemoved {
-	cursor: none;
 }

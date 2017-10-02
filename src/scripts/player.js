@@ -367,7 +367,12 @@ class Player {
       controlBar.classList.add('controlBarIsActive')
       body.classList.remove('cursorIsRemoved')
       clearTimeout(timer)
-      timer = setTimeout( mouseStopped, 3000)
+      timer = setTimeout(mouseStopped, 3000)
+    })
+
+    player.addEventListener('mouseleave', function() {
+      controlBar.classList.remove('controlBarIsActive')
+      clearTimeout(timer)
     })
 
     controlBar.addEventListener('mouseover', function() {
