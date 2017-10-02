@@ -54,6 +54,8 @@ class Player {
 
   createControllers() {
 
+    let body = document.querySelector('body')
+
     let player = this.player
     let playerContainer = this.playerContainer
     let parent = this.parent
@@ -361,18 +363,21 @@ class Player {
     })
 
     // Display ControlBar correctly
+    let timer = null
 
     controlBarDisplay.forEach(function(e) {
-      e.addEventListener('mouseover', function() {
+      e.addEventListener('mousemove', function() {
         controlBar.classList.add('controlBarIsActive')
+        body.classList.remove('cursorIsRemoved')
+        clearTimeout(timer)
+        timer = setTimeout( mouseStopped, 3000)
       })
     })
 
-    controlBarDisplay.forEach(function(e) {
-      e.addEventListener('mouseleave', function() {
-        controlBar.classList.remove('controlBarIsActive')
-      })
-    })
+    function mouseStopped() {
+      controlBar.classList.remove('controlBarIsActive')
+      body.classList.add('cursorIsRemoved')
+    }
   }
 }
 
