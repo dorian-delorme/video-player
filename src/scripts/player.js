@@ -65,7 +65,7 @@ class Player {
     controlBar.className = 'controlBar'
     playerContainer.appendChild(controlBar)
 
-    let controlBarDisplay = [player, controlBar]
+    let timer = null
 
     // Create play/pause button
     let playPauseButton = document.createElement('div')
@@ -363,15 +363,17 @@ class Player {
     })
 
     // Display ControlBar correctly
-    let timer = null
+    player.addEventListener('mousemove', function() {
+      controlBar.classList.add('controlBarIsActive')
+      body.classList.remove('cursorIsRemoved')
+      clearTimeout(timer)
+      timer = setTimeout( mouseStopped, 3000)
+    })
 
-    controlBarDisplay.forEach(function(e) {
-      e.addEventListener('mousemove', function() {
-        controlBar.classList.add('controlBarIsActive')
-        body.classList.remove('cursorIsRemoved')
-        clearTimeout(timer)
-        timer = setTimeout( mouseStopped, 3000)
-      })
+    controlBar.addEventListener('mouseover', function() {
+      clearTimeout(timer)
+      controlBar.classList.add('controlBarIsActive')
+      body.classList.remove('cursorIsRemoved')
     })
 
     function mouseStopped() {
