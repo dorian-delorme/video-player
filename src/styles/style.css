@@ -110,18 +110,26 @@ video {
 }
 
 .timeline {
-	position: relative;
-	margin-left: 10px !important;
+	position: absolute;
+	top: -9px;
+	left: 0;
+	right: 0;
 	width: 100%;
-	height: 10px;
+	height: 12px;
 	background-color: rgba(255, 255, 255, 0.5);
 	cursor: pointer;
+	transform: scaleY(0.5);
+	transition: all 200ms ease;
+}
+
+.timeline:hover {
+	transform: scaleY(1);
 }
 
 .timelineLoadingBar {
 	background-color: rgba(0, 0, 0, 0.8);
 	position: absolute;
-	height: 10px;
+	height: 100%;
 	top: 0;
 	left: 0;
 	bottom: 0;
@@ -134,7 +142,7 @@ video {
 .timelineBar {
 	background-color: #3498db;
 	position: absolute;
-	height: 10px;
+	height: 100%;
 	top: 0;
 	left: 0;
 	bottom: 0;
@@ -162,7 +170,7 @@ video {
 	transition: all 100ms ease; 
 }
 
-.fullscreenButton {
+.fullscreenButton { 
 	width: 10px;
 	height: 10px;
 	min-width: 10px;

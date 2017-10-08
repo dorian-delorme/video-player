@@ -385,6 +385,23 @@ class Player {
       controlBar.classList.remove('controlBarIsActive')
       body.classList.add('cursorIsRemoved')
     }
+
+    // Volume using scroll
+
+    // let lastScrollTop = window.pageYOffset;
+
+    // player.addEventListener('scroll', function(event) {
+    //   var st = window.pageYOffset || document.documentElement.scrollTop;
+    //   if (st > lastScrollTop){
+    //     console.log(down);
+    //       // downscroll code
+    //   } else {
+    //     console.log(up);
+    //      // upscroll code
+    //   }
+      
+    //   lastScrollTop = st;
+    // })
   }
 }
 
