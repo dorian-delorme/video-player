@@ -90,10 +90,17 @@ class Player {
     let activeVolume = false
 
     // Create currentTimer
-    let currentTimer = document.createElement('div')
-    currentTimer.className = 'currentTimer'
-    currentTimer.innerHTML = '0:00'
-    controlBar.appendChild(currentTimer)
+    let currentTimer = '0:00'
+    
+    // Create durationTimer
+    let durationTimer = '0:00'
+
+    // Create timerComplete
+    let timerComplete = document.createElement('div')
+    timerComplete.className = 'timerComplete'
+    timerComplete.innerHTML = currentTimer + '\xa0 /\xa0' + durationTimer
+
+    controlBar.appendChild(timerComplete)
 
     // Create Timeline
     let timeline = document.createElement('div')
@@ -114,12 +121,6 @@ class Player {
     let timelineBar = document.createElement('div')
     timelineBar.className = 'timelineBar'
     timeline.appendChild(timelineBar)
-
-    // Create durationTimer
-    let durationTimer = document.createElement('div')
-    durationTimer.className = 'durationTimer'
-    durationTimer.innerHTML = '0:00'
-    controlBar.appendChild(durationTimer)
 
     // Create fullscreenButton
     let fullscreenButton = document.createElement('div')
@@ -268,12 +269,15 @@ class Player {
 
       //
       if (dh === 0 || ch === 0) {
-        currentTimer.innerHTML = cm + ':' + cs
-        durationTimer.innerHTML = dm + ':' + ds
+        currentTimer = cm + ':' + cs
+        durationTimer = dm + ':' + ds
       } else {
-        currentTimer.innerHTML = ch + ':' + cm + ':' + cs
-        durationTimer.innerHTML = dh + ':' + dm + ':' + ds
+        currentTimer = ch + ':' + cm + ':' + cs
+        durationTimer = dh + ':' + dm + ':' + ds
       }
+
+      timerComplete.innerHTML = currentTimer + '\xa0/\xa0' + durationTimer
+
     })
 
     timeline.addEventListener('mousedown', function(event) {
