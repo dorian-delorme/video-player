@@ -138,7 +138,7 @@ class Player {
     }
 
     // Set volume at start
-    player.volume = 0.5
+    player.volume = 0
     volumeBar.style.transform = 'scaleX(' + player.volume + ')'
 
     // Events
@@ -367,7 +367,7 @@ class Player {
       controlBar.classList.add('controlBarIsActive')
       body.classList.remove('cursorIsRemoved')
       clearTimeout(timer)
-      timer = setTimeout(mouseStopped, 3000)
+      timer = setTimeout(mouseStopped, 2000)
     })
 
     player.addEventListener('mouseleave', function() {
