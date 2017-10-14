@@ -72,15 +72,22 @@ class Player {
     playPauseButton.className = 'playPauseButton'
     controlBar.appendChild(playPauseButton)
 
+    // Create volumeContainer
+    let volumeContainer = document.createElement('div')
+    volumeContainer.className = 'volumeContainer'
+    controlBar.appendChild(volumeContainer)
+
+    let volumeTimer = null
+
     // Create Mute Button
     let muteButton = document.createElement('div')
     muteButton.className = 'muteButton'
-    controlBar.appendChild(muteButton)
+    volumeContainer.appendChild(muteButton)
 
     // Create Volume Slider
     let volumeController = document.createElement('div')
     volumeController.className = 'volumeController'
-    controlBar.appendChild(volumeController)
+    volumeContainer.appendChild(volumeController)
 
     // Create Volume Bar inside Volume Slider
     let volumeBar = document.createElement('div')
@@ -171,6 +178,19 @@ class Player {
     })
 
     // Volume Events
+    volumeContainer.addEventListener('mouseover', function() {
+      volumeController.classList.add('volumeControllerHovered')
+    })
+
+    volumeContainer.addEventListener('mouseleave', function() {
+      volumeTimer = setTimeout(mouseOut, 2000)
+    })
+
+    function mouseOut() {
+      volumeController.classList.remove('volumeControllerHovered')
+      clearTimeout(volumeTimer)
+    }
+
     muteButton.addEventListener('click', function() {
       let volumeSaved = 0
       if (!muteButton.classList.contains('isMuted')) {
