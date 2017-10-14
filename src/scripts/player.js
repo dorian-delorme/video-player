@@ -68,6 +68,8 @@ class Player {
 
     let timer = null
 
+    let bufferedReady = 0
+
     // Create play/pause button
     let playPauseButton = document.createElement('div')
     playPauseButton.className = 'playPauseButton'
@@ -106,7 +108,7 @@ class Player {
     // Create timerComplete
     let timerComplete = document.createElement('div')
     timerComplete.className = 'timerComplete'
-    timerComplete.innerHTML = currentTimer + '\xa0 /\xa0' + durationTimer
+    timerComplete.innerHTML = currentTimer + '\xa0 / \xa0' + durationTimer
 
     controlBar.appendChild(timerComplete)
 
@@ -238,6 +240,10 @@ class Player {
       activeVolume = false
     })
 
+    player.addEventListener('canplay', function() {
+      bufferedReady = player.buffered.end(0)
+    })
+
     // Timeline Events
     setInterval(function barProgression() {
       // Display bar progression
@@ -253,7 +259,7 @@ class Player {
       }
 
       // Display on timeline what is already loaded
-      timelineLoadingBar.style.transform = 'scaleX(' + player.buffered.end(0) / player.duration + ')'
+      timelineLoadingBar.style.transform = 'scaleX(' + bufferedReady / player.duration + ')'
 
     }, 16)
 
