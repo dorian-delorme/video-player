@@ -12,6 +12,8 @@ new Player({ basePath: './src/videos/', parent: '.parent', id: '1', ... })
 
 ## To-Do
 
+* Fix bufferend.range error
+* Add Loader
 * Add Poster if autoplay is not enabled
 * Add subtitle to the video
 * Add quality switch
