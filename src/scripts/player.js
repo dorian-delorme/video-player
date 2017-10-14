@@ -179,6 +179,7 @@ class Player {
 
     // Volume Events
     volumeContainer.addEventListener('mouseover', function() {
+      clearTimeout(volumeTimer)
       volumeController.classList.add('volumeControllerHovered')
     })
 
