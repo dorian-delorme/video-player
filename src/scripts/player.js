@@ -13,14 +13,14 @@ class Player {
     height,
     controls,
     autoplay,
-    loop
+    loop,
+    poster
   }) {
 
     this.parent = document.querySelector(params.parent)
     this.link = params.basePath + params.link
     this.width = params.width
     this.height = params.height
-    this.autoplay = params.autoplay
     this.loop = params.loop
     this.id = params.id
     this.className = params.className
@@ -38,9 +38,10 @@ class Player {
     this.player.src = this.link
     this.player.id = this.id
     this.player.className = this.className
-    this.player.autoplay = this.autoplay
+    this.player.autoplay = params.autoplay
     this.player.controls = false
     this.player.loop = this.loop
+    this.player.poster = params.basePath + params.poster
 
     this.playerContainer.appendChild(this.player)
 
@@ -440,6 +441,7 @@ let customPlayer = new Player({
   width: 800,
   height: 'auto',
   controls: true,
-  autoplay: true,
-  loop: false
+  autoplay: false,
+  loop: false,
+  poster: '../../src/img/poster.jpg'
 })
