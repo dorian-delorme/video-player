@@ -14,7 +14,8 @@ new Player({ basePath: './src/videos/', parent: '.parent', id: '1', ... })
 
 * Fix bufferend.range error
 * Add Loader
-* Add Poster if autoplay is not enabled
+* Add poster from random frame
+* Add poster if autoplay is not enabled (DONE)
 * Add subtitle to the video
 * Add quality switch
 * Display targeted time on timeline hover
