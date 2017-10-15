@@ -65,7 +65,7 @@ video {
 	min-width: 10px;
 	height: 10px;
 	min-height: 10px;
-	transition: all 200ms ease;
+	transition: transform 200ms ease, background-color 200ms ease;
 	background-color: rgba(0, 0, 0, 0.5);
 }
 
@@ -91,7 +91,7 @@ video {
 	min-height: 10px;
 	background-color: white;
 	margin: 0 10px !important;
-	transition: all 200ms ease;
+	transition: transform 200ms ease, background-color 200ms ease;
 	cursor: pointer;
 }
 
@@ -111,7 +111,7 @@ video {
 	height: 10px;
 	background-color: rgba(0, 0, 0, 0.5);
 	cursor: pointer;
-	transition: all 200ms ease;
+	transition: width 200ms ease, margin 200ms ease;
 }
 
 .volumeControllerHovered {
@@ -128,7 +128,7 @@ video {
 	left: 0;
 	bottom: 0;
 	pointer-events: none;
-	transition: all 200ms ease;
+	transition: transform 200ms ease;
 	width: 100%;
 	transform-origin: 0 0;
 	transform: scaleX(0);
@@ -144,7 +144,7 @@ video {
 	background-color: rgba(0, 0, 0, 1);
 	cursor: pointer;
 	transform: scaleY(0.5);
-	transition: all 200ms ease;
+	transition: transform 200ms ease;
 }
 
 .timeline:hover {
@@ -187,7 +187,7 @@ video {
 }
 
 .isTransiting {
-	transition: all 100ms ease; 
+	transition: transform 100ms ease; 
 }
 
 .fullscreenButton {
@@ -200,7 +200,7 @@ video {
 	background-color: white;
 	margin: 0 10px !important;
 	cursor: pointer;
-	transition: all 200ms ease;
+	transition: transform 200ms ease, background-color 200ms ease;
 }
 
 .fullscreenButton:hover {
