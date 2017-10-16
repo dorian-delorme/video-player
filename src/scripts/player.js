@@ -55,6 +55,13 @@ class Player {
 
   createControllers() {
 
+    function formatTime(value) {
+      if (value < 10) {
+        value = '0' + value
+        return value
+      } else return value
+    }
+
     let body = document.querySelector('body')
 
     let player = this.player
@@ -136,6 +143,11 @@ class Player {
     let fullscreenButton = document.createElement('div')
     fullscreenButton.className = 'fullscreenButton'
     controlBar.appendChild(fullscreenButton)
+
+    // Create timerIndication
+    let timerIndication = document.createElement('div')
+    timerIndication.className = 'timerIndication'
+    timeline.appendChild(timerIndication)
 
     let fullscreenMode = false
 
@@ -322,12 +334,29 @@ class Player {
     })
 
     timeline.addEventListener('mousemove', function(event) {
+      let requestedPosition = event.offsetX / timeline.offsetWidth
+      let timerHoverValue = new Date(null)
+      timerHoverValue.setSeconds(requestedPosition * player.duration)
+      let thvS = timerHoverValue.getSeconds()
+      let thvM = timerHoverValue.getMinutes()
+      let thvH = timerHoverValue.getUTCHours()
+      if (thvH === 0 && thvM === 0) {
+        timerIndication.innerHTML = '0' + ':' + formatTime(thvS)
+      } else if (thvH === 0) {
+        timerIndication.innerHTML = thvM + ':' + formatTime(thvS)
+      } else {
+        timerIndication.innerHTML = thvH + formatTime(thvM) + ':' + formatTime(thvS)
+      }
+      timerIndication.style.left = (requestedPosition * 100) - (timerIndication.getBoundingClientRect().width / 20) + '%'
       if (activeTimeline) {
-        let requestedPosition = event.offsetX / timeline.offsetWidth
         player.currentTime = player.duration * requestedPosition
         timelineBar.style.transform = 'scaleX(' + requestedPosition + ')'
         position = player.currentTime
       }
+    })
+
+    timeline.addEventListener('mouseleave', function(event) {
+        timerIndication.innerHTML = ''
     })
 
     window.addEventListener('mouseup', function() {
@@ -420,23 +449,6 @@ class Player {
       controlBar.classList.remove('controlBarIsActive')
       body.classList.add('cursorIsRemoved')
     }
-
-    // Volume using scroll
-
-    // let lastScrollTop = window.pageYOffset;
-
-    // player.addEventListener('scroll', function(event) {
-    //   var st = window.pageYOffset || document.documentElement.scrollTop;
-    //   if (st > lastScrollTop){
-    //     console.log(down);
-    //       // downscroll code
-    //   } else {
-    //     console.log(up);
-    //      // upscroll code
-    //   }
-      
-    //   lastScrollTop = st;
-    // })
   }
 }
 

@@ -151,6 +151,15 @@ video {
 	transform: scaleY(1);
 }
 
+.timerIndication {
+	position: absolute;
+	padding: 10px;
+	font-size: 10px;
+	font-family: sans-serif;
+	bottom: 12px;
+	color: white;
+}
+
 .timelineLoadingBar {
 	background-color: rgba(52, 152, 219, 0.4);
 	position: absolute;

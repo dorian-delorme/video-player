@@ -14,17 +14,19 @@ new Player({ basePath: './src/videos/', parent: '.parent', id: '1', ... })
 
 * (FIXED) Fix bufferend.range error
 * (FIXED) Replace SetInterval by RAF
+
+* (DONE) Add poster if autoplay is not enabled
+* (DONE) Replace all transition : all 500ms ease by transition: truescope time realanimation<br>
+* (DONE) Display targeted time on timeline hover
+
 * Add Loader
 * Add poster from random frame
-* (DONE) Add poster if autoplay is not enabled
 * Add subtitle to the video
 * Add quality switch
-* Display targeted time on timeline hover
 * Add playspeed options even if I don't see the utily atm
 * Add icons to replace ugly blocks
 * Play pause animation on screen
 * Display frame preview on timeline hover
-* (DONE) Replace all transition : all 500ms ease by transition: truescope time realanimation 
 * Color personnalization
 * More incoming (if you have an idea just send me dm or pull requests)
 
