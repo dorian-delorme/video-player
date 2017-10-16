@@ -245,7 +245,7 @@ class Player {
     })
 
     // Timeline Events
-    setInterval(function barProgression() {
+    function barProgression() {
       // Display bar progression
       let timelineBarProgression = player.currentTime / player.duration
 
@@ -261,7 +261,10 @@ class Player {
       // Display on timeline what is already loaded
       timelineLoadingBar.style.transform = 'scaleX(' + bufferedReady / player.duration + ')'
 
-    }, 16)
+      requestAnimationFrame(barProgression)
+    }
+
+    requestAnimationFrame(barProgression)
 
     player.addEventListener('timeupdate', function() {
 

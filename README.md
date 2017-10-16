@@ -13,6 +13,7 @@ new Player({ basePath: './src/videos/', parent: '.parent', id: '1', ... })
 ## To-Do
 
 * (FIXED) Fix bufferend.range error
+* (FIXED) Replace SetInterval by RAF
 * Add Loader
 * Add poster from random frame
 * (DONE) Add poster if autoplay is not enabled
