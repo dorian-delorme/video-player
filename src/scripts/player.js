@@ -279,16 +279,16 @@ class Player {
       timelineLoadingBar.style.transform = 'scaleX(' + bufferedReady / player.duration + ')'
 
       if (player.readyState === 0) {
-        loader.style.opacity = '1'
+        loader.classList.add('loaderActive')
         console.log('Can\'t find media source');
       } else if (player.readyState === 1) {
-        loader.style.opacity = '1'
+        loader.classList.add('loaderActive')
       } else if (player.readyState === 2) {
-        loader.style.opacity = '1'
+        loader.classList.add('loaderActive')
       } else if (player.readyState === 3) {
-        loader.style.opacity = '0'
+        loader.classList.remove('loaderActive')
       } else if (player.readyState === 4) {
-        loader.style.opacity = '0'
+        loader.classList.remove('loaderActive')
       }
 
       requestAnimationFrame(barProgression)

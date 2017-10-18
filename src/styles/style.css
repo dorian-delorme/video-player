@@ -31,7 +31,6 @@ video {
     border-radius: 50%;
     width: 60px;
     height: 60px;
-    animation: spin 800ms linear infinite;
     position: absolute;
     margin: auto;
     left: 0;
@@ -40,6 +39,11 @@ video {
     top: 0;
     transition: opacity 100ms ease;
     opacity: 0;
+}
+
+.loaderActive {
+	animation: spin 800ms linear infinite;
+	opacity: 1;
 }
 
 @keyframes spin {
