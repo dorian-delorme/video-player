@@ -22,6 +22,29 @@ video {
 	position: relative;
 	outline: none;
 	line-height: 0;
+	display: flex;
+}
+
+.loader {
+    border: 8px solid rgba( 243, 243, 243, 0.8); /* Light grey */
+    border-top: 8px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 800ms linear infinite;
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    transition: opacity 100ms ease;
+    opacity: 0;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 .controlBar {

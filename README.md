@@ -14,12 +14,14 @@ new Player({ basePath: './src/videos/', parent: '.parent', id: '1', ... })
 
 * (FIXED) Fix bufferend.range error
 * (FIXED) Replace SetInterval by RAF
+<br/>
 
 * (DONE) Add poster if autoplay is not enabled
-* (DONE) Replace all transition : all 500ms ease by transition: truescope time realanimation<br>
+* (DONE) Replace all transition : all 500ms ease by transition: truescope time realanimation
 * (DONE) Display targeted time on timeline hover
+* (DONE) Add Loader
+<br/>
 
-* Add Loader
 * Add poster from random frame
 * Add subtitle to the video
 * Add quality switch

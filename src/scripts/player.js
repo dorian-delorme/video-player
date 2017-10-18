@@ -68,6 +68,11 @@ class Player {
     let playerContainer = this.playerContainer
     let parent = this.parent
 
+    // Create Loader
+    let loader = document.createElement('div')
+    loader.className = 'loader'
+    playerContainer.appendChild(loader)
+
     // Create control bar
     let controlBar = document.createElement('div')
     controlBar.className = 'controlBar'
@@ -272,6 +277,19 @@ class Player {
 
       // Display on timeline what is already loaded
       timelineLoadingBar.style.transform = 'scaleX(' + bufferedReady / player.duration + ')'
+
+      if (player.readyState === 0) {
+        loader.style.opacity = '1'
+        console.log('Can\'t find media source');
+      } else if (player.readyState === 1) {
+        loader.style.opacity = '1'
+      } else if (player.readyState === 2) {
+        loader.style.opacity = '1'
+      } else if (player.readyState === 3) {
+        loader.style.opacity = '0'
+      } else if (player.readyState === 4) {
+        loader.style.opacity = '0'
+      }
 
       requestAnimationFrame(barProgression)
     }
