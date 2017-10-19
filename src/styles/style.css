@@ -238,6 +238,41 @@ video {
 	margin-right: 10px !important;
 	display: inline-block;
 	background-color: white;
+	position: relative;
+}
+
+.qualitySwitcherItems {
+	transition: opacity 200ms ease;
+	width: 50px;
+	opacity: 0;
+	pointer-events: none;
+	position: absolute;
+	bottom: 30px;
+	left: -20px;
+	right: 0;
+	display: flex;
+	flex-direction: column;
+}
+
+.qualitySwitcherItem {
+	padding: 10px 0;
+	width: 100%;
+	background-color: rgba(52, 152, 219, 0.4);
+	transition: background-color 500ms ease;
+	color: white;
+	line-height: 1em;
+	font-family: sans-serif;
+	text-align: center;
+	font-size: 10px;
+}
+
+.qualitySwitcherItem:hover {
+	background-color: #3498db;
+}
+
+.qualitySwitcherItemsActive {
+	opacity: 1;
+	pointer-events: auto;
 }
 
 .fullscreenButton {

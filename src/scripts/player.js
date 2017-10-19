@@ -8,7 +8,7 @@ class Player {
     parent,
     id,
     className,
-    link,
+    name,
     width,
     height,
     controls,
@@ -18,7 +18,9 @@ class Player {
   }) {
 
     this.parent = document.querySelector(params.parent)
-    this.link = params.basePath + params.link
+    this.basePath = params.basePath
+    this.name = params.name
+    this.link = params.basePath + params.name
     this.width = params.width
     this.height = params.height
     this.loop = params.loop
@@ -67,6 +69,8 @@ class Player {
     let player = this.player
     let playerContainer = this.playerContainer
     let parent = this.parent
+    let basePath = this.basePath
+    let videoName = this.name;
 
     // Create Loader
     let loader = document.createElement('div')
@@ -156,6 +160,27 @@ class Player {
     let qualitySwitcher = document.createElement('div')
     qualitySwitcher.className = 'qualitySwitcher'
     controlBarRight.appendChild(qualitySwitcher)
+
+    // Create qualitySwitcherItems
+    let qualitySwitcherItems = document.createElement('div')
+    qualitySwitcherItems.className = 'qualitySwitcherItems'
+    qualitySwitcher.appendChild(qualitySwitcherItems)
+
+    // Create qualitySwitcherItem
+    let qualitySwitcherItemHD = document.createElement('div')
+    qualitySwitcherItemHD.className = 'qualitySwitcherItemHD'
+    qualitySwitcherItemHD.classList.add('qualitySwitcherItem')
+    qualitySwitcherItemHD.innerHTML = 'HD'
+    qualitySwitcherItems.appendChild(qualitySwitcherItemHD)
+
+    // Create qualitySwitcherItem
+    let qualitySwitcherItemSD = document.createElement('div')
+    qualitySwitcherItemSD.className = 'qualitySwitcherItemSD'
+    qualitySwitcherItemSD.classList.add('qualitySwitcherItem')
+    qualitySwitcherItemSD.innerHTML = 'SD'
+    qualitySwitcherItems.appendChild(qualitySwitcherItemSD)
+
+    let qualityTimer = null
 
     // Create fullscreenButton
     let fullscreenButton = document.createElement('div')
@@ -304,6 +329,10 @@ class Player {
         loader.classList.remove('loaderActive')
       }
 
+      // if(durationTimer === 'NaN:NaN') {
+      //   durationTimer = '0:00'
+      // }
+
       requestAnimationFrame(barProgression)
     }
 
@@ -399,6 +428,39 @@ class Player {
       }
     })
 
+    // Quality switcher
+    qualitySwitcher.addEventListener('click', function() {
+      clearTimeout(qualityTimer)
+      qualitySwitcherItems.classList.add('qualitySwitcherItemsActive')
+      qualityTimer = setTimeout(qualitySwitcherHidden, 5000)
+    })
+
+    qualitySwitcherItems.addEventListener('mouseleave', function() {
+      qualityTimer = setTimeout(qualitySwitcherHidden, 2000)
+    })
+
+    qualitySwitcherItems.addEventListener('mouseover', function() {
+      clearTimeout(qualityTimer)
+    })
+
+    qualitySwitcherItemHD.addEventListener('click', function() {
+      let timeSaved = player.currentTime
+      player.src = basePath + 'HD_' + videoName
+      player.currentTime = timeSaved
+      player.play()
+    })
+
+    qualitySwitcherItemSD.addEventListener('click', function() {
+      let timeSaved = player.currentTime
+      player.src = basePath + 'SD_' + videoName
+      player.currentTime = timeSaved
+      player.play()
+    })
+
+    function qualitySwitcherHidden() {
+      qualitySwitcherItems.classList.remove('qualitySwitcherItemsActive')
+    }
+
     // Fullscreen
     fullscreenButton.addEventListener('click', function(e) {
       if (!fullscreenMode) {
@@ -489,7 +551,7 @@ let customPlayer = new Player({
   parent: '.container',
   id: '1',
   className: 'customPlayer',
-  link: 'video.mp4',
+  name: 'video.mp4',
   width: 800,
   height: 'auto',
   controls: true,

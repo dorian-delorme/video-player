@@ -21,11 +21,12 @@ new Player({ basePath: './src/videos/', parent: '.parent', id: '1', ... })
 * (DONE) Replace all transition : all 500ms ease by transition: truescope time realanimation
 * (DONE) Display targeted time on timeline hover
 * (DONE) Add Loader
+* (DONE) Add quality switch
 <br/>
 
+* Fix durationTime when switching quality
 * Add poster from random frame
 * Add subtitle to the video
-* Add quality switch
 * Allow no-ES6 friendly to use this player
 * Add playspeed options even if I don't see the utily atm
 * Add icons to replace ugly blocks
