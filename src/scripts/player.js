@@ -125,7 +125,7 @@ class Player {
 
     // Create currentTimer
     let currentTimer = '0:00'
-    
+
     // Create durationTimer
     let durationTimer = '0:00'
 
@@ -245,7 +245,7 @@ class Player {
       volumeTimer = setTimeout(mouseOut, 2000)
     })
 
-    function mouseOut() {
+    function mouseOut()  {
       volumeController.classList.remove('volumeControllerHovered')
       clearTimeout(volumeTimer)
     }
@@ -295,7 +295,25 @@ class Player {
       activeVolume = false
     })
 
+    let durationTimeFormated = null
+    let ds = null
+    let dm = null
+    let dh = null
+
     player.addEventListener('canplay', function() {
+      durationTimeFormated = new Date(null)
+      durationTimeFormated.setSeconds(Math.floor(player.duration))
+      ds = durationTimeFormated.getSeconds()
+      dm = durationTimeFormated.getMinutes()
+      dh = durationTimeFormated.getUTCHours()
+
+      if (dh == 0) {
+        durationTimer = dm + ':' + formatTime(ds)
+      } else if (dm < 10) {
+        durationTimer = dh + ':' + formatTime(dm) + ':' + formatTime(ds)
+      } else {
+        durationTimer = dh + ':' + formatTime(dm) + ':' + formatTime(ds)
+      }
       bufferedReady = player.buffered.end(0)
     })
 
@@ -319,7 +337,7 @@ class Player {
       if (player.readyState === 0) {
         loader.classList.add('loaderActive')
         console.log('Can\'t find media source');
-      } else if (player.readyState === 1) {
+      } else if (player.readyState === 1)  {
         loader.classList.add('loaderActive')
       } else if (player.readyState === 2) {
         loader.classList.add('loaderActive')
@@ -341,11 +359,6 @@ class Player {
     player.addEventListener('timeupdate', function() {
 
       // Display time formated
-      let durationTimeFormated = new Date(null)
-      durationTimeFormated.setSeconds(Math.floor(player.duration))
-      let ds = durationTimeFormated.getSeconds()
-      let dm = durationTimeFormated.getMinutes()
-      let dh = durationTimeFormated.getUTCHours()
 
       let currentTimeFormated = new Date(null)
       currentTimeFormated.setSeconds(Math.floor(player.currentTime))
@@ -362,21 +375,13 @@ class Player {
         cm = '0' + cm
       }
 
-      // Checks for durationTime display
-      if (ds >= 0 && ds < 10) {
-        ds = '0' + ds
-      }
-      if (dh > 0 && (dm === 0 && dm < 10)) {
-        dm = '0' + cm
-      }
-
       //
       if (dh === 0 || ch === 0) {
         currentTimer = cm + ':' + cs
-        durationTimer = dm + ':' + ds
+          // durationTimer = dm + ':' + ds
       } else {
         currentTimer = ch + ':' + cm + ':' + cs
-        durationTimer = dh + ':' + dm + ':' + ds
+          // durationTimer = dh + ':' + dm + ':' + ds
       }
 
       timerComplete.innerHTML = currentTimer + '\xa0/\xa0' + durationTimer
@@ -416,7 +421,7 @@ class Player {
     })
 
     timeline.addEventListener('mouseleave', function(event) {
-        timerIndication.innerHTML = ''
+      timerIndication.innerHTML = ''
     })
 
     window.addEventListener('mouseup', function() {
@@ -444,16 +449,20 @@ class Player {
     })
 
     qualitySwitcherItemHD.addEventListener('click', function() {
+      player.pause()
       let timeSaved = player.currentTime
       player.src = basePath + 'HD_' + videoName
       player.currentTime = timeSaved
+      player.load();
       player.play()
     })
 
     qualitySwitcherItemSD.addEventListener('click', function() {
+      player.pause()
       let timeSaved = player.currentTime
       player.src = basePath + 'SD_' + videoName
       player.currentTime = timeSaved
+      player.load();
       player.play()
     })
 

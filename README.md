@@ -15,6 +15,7 @@ new Player({ basePath: './src/videos/', parent: '.parent', id: '1', ... })
 * (FIXED) Fix bufferend.range error
 * (FIXED) Replace SetInterval by RAF
 * (FIXED) Get flex back
+* (FIXED) NaN duration issue
 <br/>
 
 * (DONE) Add poster if autoplay is not enabled
