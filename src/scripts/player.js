@@ -78,6 +78,14 @@ class Player {
     controlBar.className = 'controlBar'
     playerContainer.appendChild(controlBar)
 
+    let controlBarLeft = document.createElement('div')
+    controlBarLeft.className = 'controlBarLeft'
+    controlBar.appendChild(controlBarLeft)
+
+    let controlBarRight = document.createElement('div')
+    controlBarRight.className = 'controlBarRight'
+    controlBar.appendChild(controlBarRight)
+
     let timer = null
 
     let bufferedReady = 0
@@ -85,12 +93,12 @@ class Player {
     // Create play/pause button
     let playPauseButton = document.createElement('div')
     playPauseButton.className = 'playPauseButton'
-    controlBar.appendChild(playPauseButton)
+    controlBarLeft.appendChild(playPauseButton)
 
     // Create volumeContainer
     let volumeContainer = document.createElement('div')
     volumeContainer.className = 'volumeContainer'
-    controlBar.appendChild(volumeContainer)
+    controlBarLeft.appendChild(volumeContainer)
 
     let volumeTimer = null
 
@@ -122,7 +130,7 @@ class Player {
     timerComplete.className = 'timerComplete'
     timerComplete.innerHTML = currentTimer + '\xa0 / \xa0' + durationTimer
 
-    controlBar.appendChild(timerComplete)
+    controlBarLeft.appendChild(timerComplete)
 
     // Create Timeline
     let timeline = document.createElement('div')
@@ -144,10 +152,15 @@ class Player {
     timelineBar.className = 'timelineBar'
     timeline.appendChild(timelineBar)
 
+    // Create qualitySwitcher
+    let qualitySwitcher = document.createElement('div')
+    qualitySwitcher.className = 'qualitySwitcher'
+    controlBarRight.appendChild(qualitySwitcher)
+
     // Create fullscreenButton
     let fullscreenButton = document.createElement('div')
     fullscreenButton.className = 'fullscreenButton'
-    controlBar.appendChild(fullscreenButton)
+    controlBarRight.appendChild(fullscreenButton)
 
     // Create timerIndication
     let timerIndication = document.createElement('div')

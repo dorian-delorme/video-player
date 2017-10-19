@@ -14,6 +14,7 @@ new Player({ basePath: './src/videos/', parent: '.parent', id: '1', ... })
 
 * (FIXED) Fix bufferend.range error
 * (FIXED) Replace SetInterval by RAF
+* (FIXED) Get flex back
 <br/>
 
 * (DONE) Add poster if autoplay is not enabled
@@ -25,6 +26,7 @@ new Player({ basePath: './src/videos/', parent: '.parent', id: '1', ... })
 * Add poster from random frame
 * Add subtitle to the video
 * Add quality switch
+* Allow no-ES6 friendly to use this player
 * Add playspeed options even if I don't see the utily atm
 * Add icons to replace ugly blocks
 * Play pause animation on screen

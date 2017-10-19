@@ -58,25 +58,31 @@ video {
 	bottom: 0;
 	left: 0;
 	right: 0;
-	padding: 10px 0;
+	height: 30px;
 	width: 100%;
 	background-color: rgba(0, 0, 0, 0.3);
 	align-items: center;
 	transition: opacity 500ms ease;
 	pointer-events: none;
-}
-
-.controlBar > div {
-	float: left;
-}
-
-.controlBar > div:last-child {
-	float: right;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
 }
 
 .controlBarIsActive {
 	opacity: 1;
 	pointer-events: auto;
+}
+
+.controlBarLeft {
+	display: flex;
+	flex-direction: row;
+}
+
+.controlBarRight {
+	display: flex;
+	flex-direction: row;
 }
 
 .cursorIsRemoved {
@@ -225,15 +231,23 @@ video {
 	transition: transform 100ms ease; 
 }
 
+.qualitySwitcher {
+	width: 10px;
+	height: 10px;
+	cursor: pointer;
+	margin-right: 10px !important;
+	display: inline-block;
+	background-color: white;
+}
+
 .fullscreenButton {
 	display: inline-block;
-	float: right; 
 	width: 10px;
 	height: 10px;
 	min-width: 10px;
 	min-height: 10px;
 	background-color: white;
-	margin: 0 10px !important;
+	margin-right: 10px !important;
 	cursor: pointer;
 	transition: transform 200ms ease, background-color 200ms ease;
 }
