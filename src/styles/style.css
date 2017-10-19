@@ -29,7 +29,6 @@ video {
 
 .loader {
     border: 8px solid rgba( 243, 243, 243, 0.8); /* Light grey */
-    border-top: 8px solid #3498db; /* Blue */
     border-radius: 50%;
     width: 60px;
     height: 60px;
@@ -155,7 +154,6 @@ video {
 
 .volumeBar {
 	display: inline-block;
-	background-color: #3498db;
 	position: absolute;
 	height: 10px;
 	top: 0;
@@ -195,7 +193,6 @@ video {
 }
 
 .timelineLoadingBar {
-	background-color: rgba(52, 152, 219, 0.4);
 	position: absolute;
 	height: 100%;
 	top: 0;
@@ -208,7 +205,6 @@ video {
 }
 
 .timelineBar {
-	background-color: #3498db;
 	position: absolute;
 	height: 100%;
 	top: 0;
@@ -259,17 +255,12 @@ video {
 .qualitySwitcherItem {
 	padding: 10px 0;
 	width: 100%;
-	background-color: rgba(52, 152, 219, 0.4);
 	transition: background-color 500ms ease;
 	color: white;
 	line-height: 1em;
 	font-family: sans-serif;
 	text-align: center;
 	font-size: 10px;
-}
-
-.qualitySwitcherItem:hover {
-	background-color: #3498db;
 }
 
 .qualitySwitcherItemsActive {

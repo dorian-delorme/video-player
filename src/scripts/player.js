@@ -14,7 +14,9 @@ class Player {
     controls,
     autoplay,
     loop,
-    poster
+    poster,
+    mainColor,
+    secondColor
   }) {
 
     this.parent = document.querySelector(params.parent)
@@ -44,6 +46,8 @@ class Player {
     this.player.controls = false
     this.player.loop = this.loop
     this.player.poster = params.basePath + params.poster
+    this.mainColor = params.mainColor
+    this.secondColor = params.secondColor
 
     this.playerContainer.appendChild(this.player)
 
@@ -71,10 +75,13 @@ class Player {
     let parent = this.parent
     let basePath = this.basePath
     let videoName = this.name;
+    let mainColor = this.mainColor
+    let secondColor = this.secondColor
 
     // Create Loader
     let loader = document.createElement('div')
     loader.className = 'loader'
+    loader.style.borderTop = '8px solid' + mainColor
     playerContainer.appendChild(loader)
 
     // Create control bar
@@ -119,6 +126,7 @@ class Player {
     // Create Volume Bar inside Volume Slider
     let volumeBar = document.createElement('div')
     volumeBar.className = 'volumeBar'
+    volumeBar.style.backgroundColor = mainColor
     volumeController.appendChild(volumeBar)
 
     let activeVolume = false
@@ -149,11 +157,13 @@ class Player {
     // Create TimelineLoadingBar
     let timelineLoadingBar = document.createElement('div')
     timelineLoadingBar.className = 'timelineLoadingBar'
+    timelineLoadingBar.style.backgroundColor = secondColor
     timeline.appendChild(timelineLoadingBar)
 
     // Create Timeline Bar
     let timelineBar = document.createElement('div')
     timelineBar.className = 'timelineBar'
+    timelineBar.style.backgroundColor = mainColor
     timeline.appendChild(timelineBar)
 
     // Create qualitySwitcher
@@ -170,6 +180,7 @@ class Player {
     let qualitySwitcherItemHD = document.createElement('div')
     qualitySwitcherItemHD.className = 'qualitySwitcherItemHD'
     qualitySwitcherItemHD.classList.add('qualitySwitcherItem')
+    qualitySwitcherItemHD.style.backgroundColor = secondColor
     qualitySwitcherItemHD.innerHTML = 'HD'
     qualitySwitcherItems.appendChild(qualitySwitcherItemHD)
 
@@ -177,6 +188,7 @@ class Player {
     let qualitySwitcherItemSD = document.createElement('div')
     qualitySwitcherItemSD.className = 'qualitySwitcherItemSD'
     qualitySwitcherItemSD.classList.add('qualitySwitcherItem')
+    qualitySwitcherItemSD.style.backgroundColor = secondColor
     qualitySwitcherItemSD.innerHTML = 'SD'
     qualitySwitcherItems.appendChild(qualitySwitcherItemSD)
 
@@ -448,22 +460,40 @@ class Player {
       clearTimeout(qualityTimer)
     })
 
+    let qItems = [qualitySwitcherItemSD, qualitySwitcherItemHD]
+
+    qItems.forEach(function(el) {
+      el.addEventListener('mouseover', function() {
+        el.style.backgroundColor = mainColor
+      })
+
+      el.addEventListener('mouseleave', function() {
+        el.style.backgroundColor = secondColor
+      })
+    })
+
     qualitySwitcherItemHD.addEventListener('click', function() {
+      let playerStatus = player.paused
       player.pause()
       let timeSaved = player.currentTime
       player.src = basePath + 'HD_' + videoName
       player.currentTime = timeSaved
       player.load();
-      player.play()
+      if(!playerStatus) {
+       player.play()
+      }
     })
 
     qualitySwitcherItemSD.addEventListener('click', function() {
+      let playerStatus = player.paused
       player.pause()
       let timeSaved = player.currentTime
       player.src = basePath + 'SD_' + videoName
       player.currentTime = timeSaved
       player.load();
-      player.play()
+      if(!playerStatus) {
+        player.play()
+      }
     })
 
     function qualitySwitcherHidden() {
@@ -566,5 +596,7 @@ let customPlayer = new Player({
   controls: true,
   autoplay: false,
   loop: false,
-  poster: '../../src/img/poster.jpg'
+  poster: '../../src/img/poster.jpg',
+  mainColor: '#3498db',
+  secondColor: 'rgba(52, 152, 219, 0.4)'
 })

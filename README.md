@@ -16,6 +16,7 @@ new Player({ basePath: './src/videos/', parent: '.parent', id: '1', ... })
 * (FIXED) Replace SetInterval by RAF
 * (FIXED) Get flex back
 * (FIXED) NaN duration issue
+* (FIXED) PlayState after switching src
 <br/>
 
 * (DONE) Add poster if autoplay is not enabled
@@ -23,9 +24,9 @@ new Player({ basePath: './src/videos/', parent: '.parent', id: '1', ... })
 * (DONE) Display targeted time on timeline hover
 * (DONE) Add Loader
 * (DONE) Add quality switch
+* (DONE) Color personnalization
 <br/>
 
-* Fix durationTime when switching quality
 * Add poster from random frame
 * Add subtitle to the video
 * Allow no-ES6 friendly to use this player
@@ -33,7 +34,6 @@ new Player({ basePath: './src/videos/', parent: '.parent', id: '1', ... })
 * Add icons to replace ugly blocks
 * Play pause animation on screen
 * Display frame preview on timeline hover
-* Color personnalization
 * More incoming (if you have an idea just send me dm or pull requests)
 
 ## Built With
