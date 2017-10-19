@@ -17,6 +17,7 @@ new Player({ basePath: './src/videos/', parent: '.parent', id: '1', ... })
 * (FIXED) Get flex back
 * (FIXED) NaN duration issue
 * (FIXED) PlayState after switching src
+* (FIXED) VideoState after draging timeline
 <br/>
 
 * (DONE) Add poster if autoplay is not enabled
@@ -27,6 +28,8 @@ new Player({ basePath: './src/videos/', parent: '.parent', id: '1', ... })
 * (DONE) Color personnalization
 <br/>
 
+* Use canvas
+* Add animation to controls
 * Add poster from random frame
 * Add subtitle to the video
 * Allow no-ES6 friendly to use this player
