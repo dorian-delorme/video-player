@@ -206,6 +206,8 @@ class Player {
 
     let fullscreenMode = false
 
+    let playerStatus = null
+
     // Check at start
 
     // Check Video Status to display the right button
@@ -401,6 +403,7 @@ class Player {
     })
 
     timeline.addEventListener('mousedown', function(event) {
+      playerStatus = player.paused
       player.pause()
       timelineBar.classList.add('isTransiting')
       activeTimeline = true
@@ -439,7 +442,9 @@ class Player {
     window.addEventListener('mouseup', function() {
       if (activeTimeline) {
         timelineBar.classList.remove('isTransiting')
-        player.play()
+        if(!playerStatus) {
+          player.play()
+        }
         playPauseButton.classList.add('isPlaying')
         activeTimeline = false
       }
@@ -473,7 +478,7 @@ class Player {
     })
 
     qualitySwitcherItemHD.addEventListener('click', function() {
-      let playerStatus = player.paused
+      playerStatus = player.paused
       player.pause()
       let timeSaved = player.currentTime
       player.src = basePath + 'HD_' + videoName
@@ -485,7 +490,7 @@ class Player {
     })
 
     qualitySwitcherItemSD.addEventListener('click', function() {
-      let playerStatus = player.paused
+      playerStatus = player.paused
       player.pause()
       let timeSaved = player.currentTime
       player.src = basePath + 'SD_' + videoName
