@@ -172,7 +172,7 @@ video {
 	left: 0;
 	right: 0;
 	width: calc(100% - 40px);
-	height: 12px;
+	height: 10px;
 	background-color: rgba(0, 0, 0, .4);
 	cursor: pointer;
 	transform: scaleY(0.5);
