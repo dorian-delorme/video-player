@@ -25,6 +25,8 @@ video {
 	outline: none;
 	line-height: 0;
 	display: flex;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 .loader {
@@ -93,12 +95,11 @@ video {
 	display: inline-block;
 	cursor: pointer;
 	margin-left: 20px !important;
-	width: 10px;
-	min-width: 10px;
-	height: 10px;
-	min-height: 10px;
 	transition: transform 200ms ease, background-color 200ms ease;
-	background-color: rgba(0, 0, 0, 0.5);
+	border-top: 5px solid transparent;
+	border-bottom: 5px solid transparent;
+	border-left: 10px solid white;
+	border-right: none: 
 }
 
 .playPauseButton:hover {
@@ -106,7 +107,11 @@ video {
 }
 
 .isPlaying {
-	background-color: white;
+	border-top: none;
+	border-bottom: none;
+    border-left: 3px solid white;
+    border-right: 3px solid white;
+    padding-right: 4px; 
 }
 
 .volumeContainer {
@@ -237,6 +242,11 @@ video {
 	display: inline-block;
 	background-color: white;
 	position: relative;
+	transition: transform 200ms ease, background-color 200ms ease;
+}
+
+.qualitySwitcher:hover {
+	transform: scale(1.1);
 }
 
 .qualitySwitcherItems {

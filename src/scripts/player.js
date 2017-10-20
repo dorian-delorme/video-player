@@ -576,6 +576,11 @@ class Player {
       clearTimeout(timer)
     })
 
+    controlBar.addEventListener('mouseleave', function() {
+      controlBar.classList.remove('controlBarIsActive')
+      clearTimeout(timer)
+    })
+
     controlBar.addEventListener('mouseover', function() {
       clearTimeout(timer)
       controlBar.classList.add('controlBarIsActive')
