@@ -89,7 +89,15 @@ class Player {
     playPauseAlert.className = 'playPauseAlert'
     playerContainer.appendChild(playPauseAlert)
 
-    // Create control bar
+    let playAlert = document.createElement('div')
+    playAlert.className = 'playAlert'
+    playPauseAlert.appendChild(playAlert)
+
+    let pauseAlert = document.createElement('div')
+    pauseAlert.className = 'pauseAlert'
+    playPauseAlert.appendChild(pauseAlert)
+
+    // Create control bard
     let controlBar = document.createElement('div')
     controlBar.className = 'controlBar'
     playerContainer.appendChild(controlBar)
@@ -383,11 +391,13 @@ class Player {
           clearTimeout(alertTimer)
           playPauseAlert.classList.add('playPauseAlertActive')
           playPauseAlert.classList.add('playState')
+          playAlert.classList.add('playAlertActive')
           alertTimer = setTimeout(alertFadeOut, 100)
         } else {
           clearTimeout(alertTimer)
           playPauseAlert.classList.add('playPauseAlertActive')
           playPauseAlert.classList.add('pauseState')
+          pauseAlert.classList.add('pauseAlertActive')
           alertTimer = setTimeout(alertFadeOut, 100)
         }
       }
@@ -401,6 +411,8 @@ class Player {
       playPauseAlert.classList.remove('playPauseAlertActive')
       playPauseAlert.classList.remove('pauseState')
       playPauseAlert.classList.remove('playState')
+      pauseAlert.classList.remove('pauseAlertActive')
+      playAlert.classList.remove('playAlertActive')
     }
 
     let alertTimer = null
