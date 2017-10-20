@@ -84,6 +84,11 @@ class Player {
     loader.style.borderTop = '8px solid' + mainColor
     playerContainer.appendChild(loader)
 
+    // Create playPause alert
+    let playPauseAlert = document.createElement('div')
+    playPauseAlert.className = 'playPauseAlert'
+    playerContainer.appendChild(playPauseAlert)
+
     // Create control bar
     let controlBar = document.createElement('div')
     controlBar.className = 'controlBar'
@@ -204,6 +209,8 @@ class Player {
     timerIndication.className = 'timerIndication'
     timeline.appendChild(timerIndication)
 
+    let isPlaying = null
+
     let fullscreenMode = false
 
     let playerStatus = null
@@ -212,8 +219,10 @@ class Player {
 
     // Check Video Status to display the right button
     if (player.autoplay) {
+      isPlaying = true
       playPauseButton.classList.add('isPlaying')
     } else {
+      isPlaying = false
       playPauseButton.classList.remove('isPlaying')
     }
 
@@ -229,9 +238,11 @@ class Player {
       e.addEventListener('click', function() {
         if (player.paused) {
           player.play()
+          isPlaying = true
           playPauseButton.classList.add('isPlaying')
         } else {
           player.pause()
+          isPlaying = false
           playPauseButton.classList.remove('isPlaying')
         }
       })
@@ -241,9 +252,11 @@ class Player {
       if (e.keyCode === 32) {
         if (player.paused) {
           player.play()
+          isPlaying = true
           playPauseButton.classList.add('isPlaying')
         } else {
           player.pause()
+          isPlaying = false
           playPauseButton.classList.remove('isPlaying')
         }
       }
@@ -331,6 +344,8 @@ class Player {
       bufferedReady = player.buffered.end(0)
     })
 
+    let statusSaved = null
+
     // Timeline Events
     function barProgression() {
       // Display bar progression
@@ -361,12 +376,34 @@ class Player {
         loader.classList.remove('loaderActive')
       }
 
-      // if(durationTimer === 'NaN:NaN') {
-      //   durationTimer = '0:00'
-      // }
+      if (statusSaved == null) {
+
+      } else if (statusSaved != isPlaying) {
+        if (isPlaying) {
+          clearTimeout(alertTimer)
+          playPauseAlert.classList.add('playPauseAlertActive')
+          playPauseAlert.classList.add('playState')
+          alertTimer = setTimeout(alertFadeOut, 100)
+        } else {
+          clearTimeout(alertTimer)
+          playPauseAlert.classList.add('playPauseAlertActive')
+          playPauseAlert.classList.add('pauseState')
+          alertTimer = setTimeout(alertFadeOut, 100)
+        }
+      }
+
+      statusSaved = isPlaying
 
       requestAnimationFrame(barProgression)
     }
+
+    function alertFadeOut() {
+      playPauseAlert.classList.remove('playPauseAlertActive')
+      playPauseAlert.classList.remove('pauseState')
+      playPauseAlert.classList.remove('playState')
+    }
+
+    let alertTimer = null
 
     requestAnimationFrame(barProgression)
 
@@ -392,10 +429,8 @@ class Player {
       //
       if (dh === 0 || ch === 0) {
         currentTimer = cm + ':' + cs
-          // durationTimer = dm + ':' + ds
       } else {
         currentTimer = ch + ':' + cm + ':' + cs
-          // durationTimer = dh + ':' + dm + ':' + ds
       }
 
       timerComplete.innerHTML = currentTimer + '\xa0/\xa0' + durationTimer
@@ -442,7 +477,7 @@ class Player {
     window.addEventListener('mouseup', function() {
       if (activeTimeline) {
         timelineBar.classList.remove('isTransiting')
-        if(!playerStatus) {
+        if (!playerStatus) {
           player.play()
         }
         playPauseButton.classList.add('isPlaying')
@@ -484,8 +519,8 @@ class Player {
       player.src = basePath + 'HD_' + videoName
       player.currentTime = timeSaved
       player.load();
-      if(!playerStatus) {
-       player.play()
+      if (!playerStatus) {
+        player.play()
       }
     })
 
@@ -496,7 +531,7 @@ class Player {
       player.src = basePath + 'SD_' + videoName
       player.currentTime = timeSaved
       player.load();
-      if(!playerStatus) {
+      if (!playerStatus) {
         player.play()
       }
     })
