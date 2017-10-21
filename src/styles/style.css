@@ -157,10 +157,6 @@ video {
 	cursor: none !important;
 }
 
-.cursorIsRemoved .playerContainer {
-	cursor: none !important;
-}
-
 .playPauseButton {
 	display: inline-block;
 	cursor: pointer;

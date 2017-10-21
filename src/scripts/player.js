@@ -240,6 +240,18 @@ class Player {
       playAlert.classList.add('playAlertActive')
     }
 
+    function destroy() {
+      playerContainer.removeEventListener('click', function() {
+        playerContainer.style.cursor = 'default'
+        destroy()
+      })
+    }
+
+    playerContainer.addEventListener('click', function() {
+      playerContainer.style.cursor = 'default'
+      destroy()
+    })
+
     // Set volume at start
     player.volume = 0
     volumeBar.style.transform = 'scaleX(' + player.volume + ')'
