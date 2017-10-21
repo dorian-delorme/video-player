@@ -234,6 +234,12 @@ class Player {
       playPauseButton.classList.remove('isPlaying')
     }
 
+    if (!isPlaying) {
+      playPauseAlert.classList.add('playPauseAlertActive')
+      playPauseAlert.classList.add('playState')
+      playAlert.classList.add('playAlertActive')
+    }
+
     // Set volume at start
     player.volume = 0
     volumeBar.style.transform = 'scaleX(' + player.volume + ')'
@@ -403,6 +409,10 @@ class Player {
       }
 
       statusSaved = isPlaying
+
+      if (!isPlaying) {
+        controlBar.classList.add('controlBarIsActive')
+      }
 
       requestAnimationFrame(barProgression)
     }
