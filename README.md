@@ -26,17 +26,19 @@ new Player({ basePath: './src/videos/', parent: '.parent', id: '1', ... })
 * (DONE) Add Loader
 * (DONE) Add quality switch
 * (DONE) Color personnalization
+* (DONE) Play pause animation on screen
 <br/>
 
-* Use canvas
 * Add animation to controls
-* Add poster from random frame
+* Add ability to share the video
+* Add ability to share the video to a defined time
 * Add subtitle to the video
-* Allow no-ES6 friendly to use this player
+* Allow no-ES6 friendly to use this player (Babel)
+* Add icons to replace ugly blocks (WIP)
+* Use canvas
+* Add poster from random frame (Canvas)
+* Display frame preview on timeline hover (Canvas)
 * Add playspeed options even if I don't see the utily atm
-* Add icons to replace ugly blocks
-* Play pause animation on screen
-* Display frame preview on timeline hover
 * More incoming (if you have an idea just send me dm or pull requests)
 
 ## Built With
