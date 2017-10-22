@@ -212,6 +212,10 @@ class Player {
     fullscreenButton.className = 'fullscreenButton'
     controlBarRight.appendChild(fullscreenButton)
 
+    let fullscreenButtonImg = document.createElement('img')
+    fullscreenButtonImg.src = basePath + '../../src/img/fullscreen.svg'
+    fullscreenButton.appendChild(fullscreenButtonImg)
+
     // Create timerIndication
     let timerIndication = document.createElement('div')
     timerIndication.className = 'timerIndication'
