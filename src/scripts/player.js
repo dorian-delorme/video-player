@@ -313,9 +313,11 @@ class Player {
         this.volumeSaved = player.volume
         player.volume = 0
         muteButton.classList.toggle('isMuted')
+        volumeBar.style.transform = 'scaleX(' + 0 + ')'
       } else {
         player.volume = this.volumeSaved
         muteButton.classList.toggle('isMuted')
+        volumeBar.style.transform = 'scaleX(' + player.volume + ')'
       }
     })
 
