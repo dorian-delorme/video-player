@@ -212,8 +212,8 @@ class Player {
     fullscreenButton.className = 'fullscreenButton'
     controlBarRight.appendChild(fullscreenButton)
 
-    let fullscreenButtonImg = document.createElement('img')
-    fullscreenButtonImg.src = basePath + '../../src/img/fullscreen.svg'
+    let fullscreenButtonImg = document.createElement('div')
+    fullscreenButtonImg.className = 'fullscreenButtonImg'
     fullscreenButton.appendChild(fullscreenButtonImg)
 
     // Create timerIndication
@@ -502,7 +502,7 @@ class Player {
       } else {
         timerIndication.innerHTML = thvH + formatTime(thvM) + ':' + formatTime(thvS)
       }
-      timerIndication.style.left = (requestedPosition * 100) - (timerIndication.getBoundingClientRect().width / 20) + '%'
+      timerIndication.style.left = requestedPosition * 100 + '%'
       if (activeTimeline) {
         player.currentTime = player.duration * requestedPosition
         timelineBar.style.transform = 'scaleX(' + requestedPosition + ')'

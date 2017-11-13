@@ -265,6 +265,7 @@ video {
 	font-family: sans-serif;
 	bottom: 12px;
 	color: white;
+	transform: translateX(-50%);
 }
 
 .timelineLoadingBar {
@@ -365,6 +366,13 @@ video {
 
 .fullscreenButton:hover {
 	transform: scale(1.1);
+}
+
+.fullscreenButtonImg {
+	border: 2px solid white;
+	width: 18px;
+	height: 10px;
+	margin: auto;
 }
 
 .fullscreenMode {
