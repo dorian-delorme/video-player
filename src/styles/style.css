@@ -199,28 +199,34 @@ video {
 
 .volumeContainer {
 	display: flex;
+	align-items: center;
+	height: 30px;
+	min-width: 40px;
 	flex-direction: row;
 }
 
 .muteButton {
 	flex-shrink: 0;
 	display: inline-block;
-	width: 10px;
-	height: 10px;
-	min-width: 10px;
-	min-height: 10px;
-	background-color: white;
 	margin: 0 10px;
 	transition: transform 200ms ease, background-color 200ms ease;
 	cursor: pointer;
-}
-
-.muteButton:hover {
-	transform: scale(1.1);
+    width: 0;
+    height: 0;
+    border: 6.4px solid;
+    border-left: none;
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+    padding: 6px 2.1px;
+    box-shadow: inset 4px 0;
+    margin: 4px 10px 4px 10px;
+    color: white;
+    transform: scaleY(.6);
+    justify-self: center;
 }
 
 .isMuted {
-	background-color: rgba(0, 0, 0, 0.5);
+	color: black;
 }
 
 .volumeController {
@@ -396,7 +402,7 @@ video {
 }
 
 .playerContainer:-webkit-full-screen {
-	width: 100%;
-	height: 100%;
+	width: 100% !important;
+	height: 100% !important;
 	background-color: black;
 }
