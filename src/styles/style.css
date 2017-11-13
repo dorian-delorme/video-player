@@ -120,7 +120,7 @@ video {
 }
 
 .controlBar {
-	opacity: 0;
+	/*opacity: 0;*/
 	min-width: 400px;
 	position: absolute;
 	display: block;
@@ -146,37 +146,50 @@ video {
 .controlBarLeft {
 	display: flex;
 	flex-direction: row;
+	align-items: center;
 }
 
 .controlBarRight {
 	display: flex;
 	flex-direction: row;
+	align-items: center;
 }
 
 .cursorIsRemoved {
-	cursor: none !important;
+	cursor: none;
 }
 
 .cursorIsRemoved .playerContainer {
-	cursor: none !important;
+	cursor: none;
 }
 
 .playPauseButton {
-	display: inline-block;
+	display: flex;
 	cursor: pointer;
-	margin-left: 20px !important;
-	transition: transform 200ms ease, background-color 200ms ease;
+	width: 40px;
+    height: 30px;
+    min-width: 40px;
+    min-height: 30px;
+	margin-left: 20px;
+}
+
+.playPauseIcon {
 	border-top: 5px solid transparent;
 	border-bottom: 5px solid transparent;
 	border-left: 10px solid white;
-	border-right: none: 
+	border-right: none;
+	height: 0;
+	width: 0;
+	margin: auto;
+	transition: transform 200ms ease, background-color 200ms ease;
 }
 
-.playPauseButton:hover {
+.playPauseButton:hover .playPauseIcon {
 	transform: scale(1.1);
 }
 
-.isPlaying {
+.isPlaying .playPauseIcon {
+	height: 10px;
 	border-top: none;
 	border-bottom: none;
     border-left: 3px solid white;
@@ -197,7 +210,7 @@ video {
 	min-width: 10px;
 	min-height: 10px;
 	background-color: white;
-	margin: 0 10px !important;
+	margin: 0 10px;
 	transition: transform 200ms ease, background-color 200ms ease;
 	cursor: pointer;
 }
@@ -223,7 +236,7 @@ video {
 
 .volumeControllerHovered {
 	width: 80px;
-	margin-right: 10px !important;
+	margin-right: 10px;
 }
 
 .volumeBar {
@@ -261,7 +274,7 @@ video {
 .timerIndication {
 	position: absolute;
 	padding: 10px;
-	font-size: 10px;
+	font-size: .7em;
 	font-family: sans-serif;
 	bottom: 12px;
 	color: white;
@@ -311,7 +324,7 @@ video {
 	height: 10px;
 	cursor: pointer;
 	margin: auto;
-	margin-right: 10px !important;
+	margin-right: 10px;
 	display: inline-block;
 	background-color: white;
 	position: relative;
@@ -339,7 +352,7 @@ video {
 	line-height: 1em;
 	font-family: sans-serif;
 	text-align: center;
-	font-size: 10px;
+	font-size: .7em;
 }
 
 .qualitySwitcherItemsActive {
@@ -350,18 +363,14 @@ video {
 .fullscreenButton {
 	display: inline-block;
 	width: 40px;
-	height: 30px;
-	min-width: 30px;
-	min-height: 30px;
+    height: 30px;
+    min-width: 40px;
+    min-height: 30px;
 	background-color: transparent;
 	display: flex;
-	margin-right: 20px !important;
+	margin-right: 20px;
 	cursor: pointer;
 	transition: transform 200ms ease, background-color 200ms ease;
-}
-
-.fullscreenButton img {
-	margin: auto;
 }
 
 .fullscreenButton:hover {
@@ -376,18 +385,18 @@ video {
 }
 
 .fullscreenMode {
-	width: 100% !important;
-	height: 100% !important;
+	width: 100%;
+	height: 100%;
 	background-color: black;
 }
 
 /*Hide controls*/
 ::-webkit-media-controls {
-  display:none !important;
+  display:none;
 }
 
 .playerContainer:-webkit-full-screen {
-	width: 100% !important;
-	height: 100% !important;
+	width: 100%;
+	height: 100%;
 	background-color: black;
 }

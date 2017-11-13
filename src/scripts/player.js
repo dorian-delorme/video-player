@@ -119,6 +119,10 @@ class Player {
     playPauseButton.className = 'playPauseButton'
     controlBarLeft.appendChild(playPauseButton)
 
+    let playPauseIcon = document.createElement('div')
+    playPauseIcon.className = 'playPauseIcon'
+    playPauseButton.appendChild(playPauseIcon)
+
     // Create volumeContainer
     let volumeContainer = document.createElement('div')
     volumeContainer.className = 'volumeContainer'
