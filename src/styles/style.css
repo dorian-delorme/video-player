@@ -156,11 +156,11 @@ video {
 }
 
 .cursorIsRemoved {
-	cursor: none;
+	cursor: none !important;
 }
 
 .cursorIsRemoved .playerContainer {
-	cursor: none;
+	cursor: none !important;
 }
 
 .playPauseButton {
