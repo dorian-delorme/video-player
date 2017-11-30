@@ -18,6 +18,7 @@ new Player({ basePath: './src/videos/', parent: '.parent', id: '1', ... })
 * (FIXED) NaN duration issue
 * (FIXED) PlayState after switching src
 * (FIXED) VideoState after draging timeline
+* (FIXED) Beautify QualitySwitcher
 <br/>
 
 * (DONE) Add poster if autoplay is not enabled
