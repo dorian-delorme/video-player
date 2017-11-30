@@ -174,9 +174,9 @@ video {
 }
 
 .playPauseIcon {
-	border-top: 5px solid transparent;
-	border-bottom: 5px solid transparent;
-	border-left: 10px solid white;
+	border-top: 8px solid transparent;
+	border-bottom: 8px solid transparent;
+	border-left: 14px solid white;
 	border-right: none;
 	height: 0;
 	width: 0;
@@ -189,11 +189,11 @@ video {
 }
 
 .isPlaying .playPauseIcon {
-	height: 10px;
+	height: 12px;
 	border-top: none;
 	border-bottom: none;
-    border-left: 3px solid white;
-    border-right: 3px solid white;
+    border-left: 4px solid white;
+    border-right: 4px solid white;
     padding-right: 4px; 
 }
 
@@ -326,44 +326,27 @@ video {
 }
 
 .qualitySwitcher {
-	width: 10px;
-	height: 10px;
+	width: 40px;
+	height: 30px;
 	cursor: pointer;
 	margin: auto;
-	margin-right: 10px;
 	display: inline-block;
-	background-color: white;
+	background-color: transparent;
 	position: relative;
 	transition: transform 200ms ease, background-color 200ms ease;
-}
-
-.qualitySwitcherItems {
-	transition: opacity 200ms ease;
-	width: 50px;
-	opacity: 0;
-	pointer-events: none;
-	position: absolute;
-	bottom: 30px;
-	left: -20px;
-	right: 0;
 	display: flex;
-	flex-direction: column;
 }
 
-.qualitySwitcherItem {
-	padding: 10px 0;
-	width: 100%;
-	transition: background-color 500ms ease;
-	color: white;
-	line-height: 1em;
+.qualitySwitcherIndication {
+	margin: auto;
+	font-weight: bolder;
+	font-size: 1em;
 	font-family: sans-serif;
+	color: white;
 	text-align: center;
-	font-size: .7em;
-}
-
-.qualitySwitcherItemsActive {
+	transition: opacity 200ms ease;
 	opacity: 1;
-	pointer-events: auto;
+	user-select: none;
 }
 
 .fullscreenButton {

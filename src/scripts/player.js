@@ -188,28 +188,11 @@ class Player {
     qualitySwitcher.className = 'qualitySwitcher'
     controlBarRight.appendChild(qualitySwitcher)
 
-    // Create qualitySwitcherItems
-    let qualitySwitcherItems = document.createElement('div')
-    qualitySwitcherItems.className = 'qualitySwitcherItems'
-    qualitySwitcher.appendChild(qualitySwitcherItems)
-
-    // Create qualitySwitcherItem
-    let qualitySwitcherItemHD = document.createElement('div')
-    qualitySwitcherItemHD.className = 'qualitySwitcherItemHD'
-    qualitySwitcherItemHD.classList.add('qualitySwitcherItem')
-    qualitySwitcherItemHD.style.backgroundColor = secondColor
-    qualitySwitcherItemHD.innerHTML = 'HD'
-    qualitySwitcherItems.appendChild(qualitySwitcherItemHD)
-
-    // Create qualitySwitcherItem
-    let qualitySwitcherItemSD = document.createElement('div')
-    qualitySwitcherItemSD.className = 'qualitySwitcherItemSD'
-    qualitySwitcherItemSD.classList.add('qualitySwitcherItem')
-    qualitySwitcherItemSD.style.backgroundColor = secondColor
-    qualitySwitcherItemSD.innerHTML = 'SD'
-    qualitySwitcherItems.appendChild(qualitySwitcherItemSD)
-
-    let qualityTimer = null
+    // Create qualitySwitcherIndication
+    let qualitySwitcherIndication = document.createElement('div')
+    qualitySwitcherIndication.className = 'qualitySwitcherIndication'
+    qualitySwitcher.appendChild(qualitySwitcherIndication)
+    qualitySwitcherIndication.innerHTML = 'HD'
 
     // Create fullscreenButton
     let fullscreenButton = document.createElement('div')
@@ -261,7 +244,7 @@ class Player {
     })
 
     // Set volume at start
-    player.volume = 0
+    player.volume = 0.5
     volumeBar.style.transform = 'scaleX(' + player.volume + ')'
 
     // Events
@@ -529,60 +512,36 @@ class Player {
       }
     })
 
+    let quality = null
+
     // Quality switcher
     qualitySwitcher.addEventListener('click', function() {
-      clearTimeout(qualityTimer)
-      qualitySwitcherItems.classList.add('qualitySwitcherItemsActive')
-      qualityTimer = setTimeout(qualitySwitcherHidden, 5000)
-    })
-
-    qualitySwitcherItems.addEventListener('mouseleave', function() {
-      qualityTimer = setTimeout(qualitySwitcherHidden, 2000)
-    })
-
-    qualitySwitcherItems.addEventListener('mouseover', function() {
-      clearTimeout(qualityTimer)
-    })
-
-    let qItems = [qualitySwitcherItemSD, qualitySwitcherItemHD]
-
-    qItems.forEach(function(el) {
-      el.addEventListener('mouseover', function() {
-        el.style.backgroundColor = mainColor
-      })
-
-      el.addEventListener('mouseleave', function() {
-        el.style.backgroundColor = secondColor
-      })
-    })
-
-    qualitySwitcherItemHD.addEventListener('click', function() {
-      playerStatus = player.paused
-      player.pause()
-      let timeSaved = player.currentTime
-      player.src = basePath + 'HD_' + videoName
-      player.currentTime = timeSaved
-      player.load();
-      if (!playerStatus) {
-        player.play()
+      if (quality == null || quality == 'HD') {
+        playerStatus = player.paused
+        player.pause()
+        let timeSaved = player.currentTime
+        player.src = basePath + 'SD_' + videoName
+        player.currentTime = timeSaved
+        player.load();
+        if (!playerStatus) {
+          player.play()
+        }
+        quality = 'SD'
+        qualitySwitcherIndication.innerHTML = 'SD'
+      } else {
+        playerStatus = player.paused
+        player.pause()
+        let timeSaved = player.currentTime
+        player.src = basePath + videoName
+        player.currentTime = timeSaved
+        player.load();
+        if (!playerStatus) {
+          player.play()
+        }
+        quality = 'HD'
+        qualitySwitcherIndication.innerHTML = 'HD'
       }
     })
-
-    qualitySwitcherItemSD.addEventListener('click', function() {
-      playerStatus = player.paused
-      player.pause()
-      let timeSaved = player.currentTime
-      player.src = basePath + 'SD_' + videoName
-      player.currentTime = timeSaved
-      player.load();
-      if (!playerStatus) {
-        player.play()
-      }
-    })
-
-    function qualitySwitcherHidden() {
-      qualitySwitcherItems.classList.remove('qualitySwitcherItemsActive')
-    }
 
     // Fullscreen
     fullscreenButton.addEventListener('click', function(e) {
