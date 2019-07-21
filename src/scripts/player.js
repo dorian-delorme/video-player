@@ -247,6 +247,45 @@ class Player {
     player.volume = 0.5
     volumeBar.style.transform = 'scaleX(' + player.volume + ')'
 
+    // Create Canvas
+
+    let canvas = document.createElement('canvas');
+    canvas.style.width = this.width + 'px';
+    canvas.style.height = this.height;
+    let video2 = document.createElement('video');
+    video2.volume = 0;
+    video2.src = this.link;
+    let ctx = canvas.getContext("2d");
+    let truc = false;
+
+    video2.addEventListener('loadeddata', function () {
+      ctx.drawImage(video2, 0, 0, canvas.width, canvas.height);
+      truc = true;
+      // context.clearRect(0, 0, canvas.width, canvas.height);
+    });
+    video2.addEventListener('timeupdate', function (e) {
+      if (truc) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(video2, 0, 0, canvas.width, canvas.height);
+        this.dataURL = canvas.toDataURL('');
+        console.log(this.dataURL);
+        // let img = new Image();
+        // img.setAttribute('crossorigin', 'anonymous')
+        // img.src = this.dataURL;
+        // console.log(this.dataURL);
+        // this.parent.appendChild(img)
+      }
+    })
+
+    video2.addEventListener('ended', () => {
+      truc = false;
+    });
+
+    // this.parent.appendChild(canvas);
+    console.log(canvas)
+    // this.parent.appendChild(video2);
+
+    
     // Events
 
     // PlayPause Events
@@ -607,6 +646,11 @@ class Player {
       body.classList.remove('cursorIsRemoved')
       clearTimeout(timer)
       timer = setTimeout(mouseStopped, 2000)
+
+      if (truc) {
+        // console.log(video2);
+        video2.play();
+      }
     })
 
     player.addEventListener('mouseleave', function() {
