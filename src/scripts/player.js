@@ -255,34 +255,108 @@ class Player {
     let video2 = document.createElement('video');
     video2.volume = 0;
     video2.src = this.link;
+    video2.setAttribute('crossOrigin', 'anonymous');
     let ctx = canvas.getContext("2d");
     let truc = false;
+    let thumbnailTime;
+    let thumbnails = [];
+    let thumbnailsTimes;
+    let firstTime = true;
+
+    function generateThumbnails() {
+      let step = video2.duration / 10;
+      thumbnailsTimes = [
+        10,
+        step,
+        2 * step,
+        3 * step,
+        4 * step,
+        5 * step,
+        6 * step,
+        7 * step,
+        8 * step,
+        9 * step,
+        (10 * step) - 10,
+      ];
+      thumbnailsTimes.forEach((step, index) => {
+        setTimeout(() => {
+          // console.log('step', step);
+          video2.currentTime = Math.floor(step);
+          thumbnailTime = step;
+        }, index * 200);
+      });
+    }
 
     video2.addEventListener('loadeddata', function () {
       ctx.drawImage(video2, 0, 0, canvas.width, canvas.height);
       truc = true;
+      generateThumbnails()
+      // console.log(video2.duration, (video2.duration) / 5)
+      // console.log(video2.currentTime);
+      // video2.play();
+      // console.log(video2.currentTime);
+      // ctx.clearRect(0, 0, canvas.width, canvas.height);
+      // ctx.drawImage(video2, 0, 0, canvas.width, canvas.height);
+      // let dataURL = canvas.toDataURL('');
+      // let img = document.createElement('img');
+      // parent.appendChild(img);
+      // img.setAttribute('crossorigin', 'anonymous')
+      // img.src = dataURL;
+      // parent.appendChild(img);
       // context.clearRect(0, 0, canvas.width, canvas.height);
     });
+
+    function makeScreenshots() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(video2, 0, 0, canvas.width, canvas.height);
+      let dataURL = canvas.toDataURL("");
+      // video2.pause()
+      // console.log("dataURL", dataURL);
+      // let img = document.createElement("img");
+      // img.setAttribute("crossorigin", "anonymous");
+      // img.src = dataURL;
+      // parent.appendChild(img);
+      thumbnails.push(dataURL);
+
+      if (thumbnailTime === (video2.duration - 10)) {
+        let imgContainer = document.querySelector(".img-container");
+        console.log('Last one');
+        video2.pause();
+        console.log(imgContainer);
+        thumbnails.forEach((el) => {
+          // console.log(el);
+          let img = document.createElement("img");
+          img.setAttribute("crossorigin", "anonymous");
+          img.src = el;
+          imgContainer.appendChild(img);
+        })
+      }
+    }
+
+    // video2.addEventListener('canplay', function (e) {
+    // });
+
     video2.addEventListener('timeupdate', function (e) {
-      if (truc) {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(video2, 0, 0, canvas.width, canvas.height);
-        this.dataURL = canvas.toDataURL('');
-        console.log(this.dataURL);
-        // let img = new Image();
+      // console.log(video2.currentTime, thumbnailTime);
+      if (truc && Math.floor(video2.currentTime) === Math.floor(thumbnailTime)) {
+        makeScreenshots();
+        // truc = false;
+        // ctx.clearRect(0, 0, canvas.width, canvas.height);
+        // ctx.drawImage(video2, 0, 0, canvas.width, canvas.height);
+        // this.dataURL = canvas.toDataURL('');
+        // // console.log(this.dataURL);
+        // let img = document.createElement('img');
         // img.setAttribute('crossorigin', 'anonymous')
         // img.src = this.dataURL;
-        // console.log(this.dataURL);
-        // this.parent.appendChild(img)
+        // // console.log(this.dataURL);
+        // parent.appendChild(img);
       }
-    })
+    });
 
     video2.addEventListener('ended', () => {
       truc = false;
     });
 
-    // this.parent.appendChild(canvas);
-    console.log(canvas)
     // this.parent.appendChild(video2);
 
     
@@ -328,7 +402,7 @@ class Player {
       volumeTimer = setTimeout(mouseOut, 2000)
     })
 
-    function mouseOut()  {
+    function mouseOut() {
       volumeController.classList.remove('volumeControllerHovered')
       clearTimeout(volumeTimer)
     }
@@ -647,9 +721,10 @@ class Player {
       clearTimeout(timer)
       timer = setTimeout(mouseStopped, 2000)
 
-      if (truc) {
+      if (truc && firstTime) {
         // console.log(video2);
         video2.play();
+        firstTime = false;
       }
     })
 

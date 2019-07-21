@@ -1,0 +1,8 @@
+{
+  "name": "video-player",
+  "version": "1.0.0",
+  "main": "src/scripts/player.js",
+  "repository": "https://github.com/dorian-delorme/video-player.git",
+  "author": "<dorian.delorme@hetic.net>",
+  "license": "MIT"
+}
