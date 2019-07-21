@@ -328,7 +328,7 @@ class Player {
           let img = document.createElement("img");
           img.setAttribute("crossorigin", "anonymous");
           img.src = el;
-          imgContainer.appendChild(img);
+          // imgContainer.appendChild(img);
         })
       }
     }
